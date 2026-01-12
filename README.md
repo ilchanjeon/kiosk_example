@@ -99,16 +99,6 @@ Win + R → shell:startup
 NSSM (Non-Sucking Service Manager) 사용 권장
 ````
 
-### 주요 API 엔드포인트
-````
-GET / - 메인 화면
-POST /api/barcode - 바코드 입력
-GET /api/status - 현재 상태 조회
-POST /api/test-print - 테스트 출력
-POST /api/test2 - WebClient 를 이용한 RestAPI 예제- Java 17 이상
-- Maven 3.6 이상
-- 시리얼 포트 드라이버 설치 (Windows: 자동, Linux: 권한 설정 필요)
-
 ### 빌드 방법
 1. Maven으로 JAR 파일 생성
    bashmvn clean package
@@ -183,4 +173,5 @@ GET /api/status - 현재 상태 조회
 POST /api/test-print - 테스트 출력
 POST /api/test2 - WebClient 를 이용한 RestAPI 예제
 POST /api/test3  - WebClient 를 이용한 RestAPI 예제2
+
 ````
