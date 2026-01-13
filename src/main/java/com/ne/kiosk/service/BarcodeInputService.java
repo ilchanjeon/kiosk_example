@@ -1,4 +1,4 @@
-package com.example.kiosk.service;
+package com.ne.kiosk.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

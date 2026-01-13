@@ -1,4 +1,4 @@
-package com.example.kiosk;
+package com.ne.kiosk;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

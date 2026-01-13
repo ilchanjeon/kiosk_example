@@ -1,4 +1,4 @@
-package com.example.kiosk.util;
+package com.ne.kiosk.util;
 
 import lombok.Builder;
 import lombok.Getter;

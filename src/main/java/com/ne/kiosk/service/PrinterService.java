@@ -1,6 +1,6 @@
-package com.example.kiosk.service;
+package com.ne.kiosk.service;
 
-import com.example.kiosk.device.SerialDeviceManager;
+import com.ne.kiosk.device.SerialDeviceManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

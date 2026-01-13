@@ -83,7 +83,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.example.kiosk.KioskApplication</mainClass>
+                    <mainClass>com.ne.kiosk.KioskApplication</mainClass>
                     <layout>JAR</layout>
                 </configuration>
                 <executions>

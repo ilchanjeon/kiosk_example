@@ -1,19 +1,14 @@
-package com.example.kiosk.service;
+package com.ne.kiosk.service;
 
-import com.example.kiosk.device.SerialDeviceManager;
-import com.fazecast.jSerialComm.SerialPort;
+import com.ne.kiosk.device.SerialDeviceManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.sound.sampled.Port;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.List;
-import java.util.Objects;
 
 @Slf4j
 @Service

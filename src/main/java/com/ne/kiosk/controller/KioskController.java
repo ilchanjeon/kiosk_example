@@ -1,18 +1,15 @@
-package com.example.kiosk.controller;
+package com.ne.kiosk.controller;
 
-import com.example.kiosk.service.BarcodeInputService;
-import com.example.kiosk.service.PrinterService;
-import com.example.kiosk.service.UltrasonicSensorService;
-import com.example.kiosk.util.ReplyFromResrc;
-import com.example.kiosk.util.RestUtil;
-import lombok.RequiredArgsConstructor;
+import com.ne.kiosk.service.BarcodeInputService;
+import com.ne.kiosk.service.PrinterService;
+import com.ne.kiosk.service.UltrasonicSensorService;
+import com.ne.kiosk.util.ReplyFromResrc;
+import com.ne.kiosk.util.RestUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;

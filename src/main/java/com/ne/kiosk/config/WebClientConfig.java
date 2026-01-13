@@ -1,4 +1,4 @@
-package com.example.kiosk.config;
+package com.ne.kiosk.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

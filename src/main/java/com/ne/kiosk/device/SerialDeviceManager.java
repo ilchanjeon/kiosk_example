@@ -1,4 +1,4 @@
-package com.example.kiosk.device;
+package com.ne.kiosk.device;
 
 import com.fazecast.jSerialComm.SerialPort;
 import lombok.extern.slf4j.Slf4j;

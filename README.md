@@ -4,7 +4,7 @@
 kiosk-system/
 ├── src/
 │   ├── main/
-│   │   ├── java/com/kiosk/
+│   │   ├── java/com/ne/kiosk/
 │   │   │   ├── KioskApplication.java
 │   │   │   ├── config/
 │   │   │   │   ├── WebSocketConfig.java
