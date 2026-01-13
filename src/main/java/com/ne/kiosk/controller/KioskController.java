@@ -70,6 +70,16 @@ public class KioskController {
         return ResponseEntity.ok(Map.of("result", printerService.getStatus()));
     }
 
+    @PostMapping("/api/test")
+    @ResponseBody
+    public ResponseEntity<?> apiTest() {
+        ReplyFromResrc reply = restUtil.ofPost("/kiosk/api/test");
+        String result = "";
+        if(reply.isEmpty()) result = "No Content";
+        else result = reply.getReply();
+        return ResponseEntity.ok(Map.of("result", result));
+    }
+
     @PostMapping("/api/test2")
     @ResponseBody
     public ResponseEntity<?> apiTest2() {

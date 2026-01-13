@@ -101,6 +101,7 @@ GET / - 메인 화면
 POST /api/barcode - 바코드 입력
 GET /api/status - 현재 상태 조회
 POST /api/test-print - 테스트 출력
-POST /api/test2 - WebClient 를 이용한 RestAPI 예제
-POST /api/test3  - WebClient 를 이용한 RestAPI 예제2
+POST /api/test - WebClient 를 이용한 RestAPI 예제1 (Data Response)
+POST /api/test2 - WebClient 를 이용한 RestAPI 예제2 (Void Response)
+POST /api/test3  - WebClient 를 이용한 RestAPI 예제3 (Parameter 전송)
 ````
