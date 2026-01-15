@@ -22,6 +22,16 @@ kiosk-system/
 │   │   │       └── RestUtil.java
 │   │   └── resources/
 │   │       ├── application.properties
+│   │       ├── static 
+│   │       │   ├── css
+│   │       │   │   └── index.css
+│   │       │   └── js
+│   │       │       │── app.js         
+│   │       │       ├── global.js
+│   │       │       └── router.js
+│   │       │       └── pages/
+│   │       │           │── home.js
+│   │       │           └── test.js
 │   │       └── templates/
 │   │           └── index.html
 └── pom.xml
@@ -34,9 +44,9 @@ kiosk-system/
 ### 빌드 방법
 1. Maven으로 JAR 파일 생성
    bashmvn clean package
-   빌드 완료 후 target/kiosk-system-1.0.0.jar 파일 생성됨
+   빌드 완료 후 target/kiosk.jar 파일 생성됨
 2. 실행
-   ```` java -jar target/kiosk-system-1.0.0.jar ````
+   ```` java -jar target/kiosk.jar ````
    #### 또는 IDE에서 직접 실행:
 - IntelliJ IDEA: KioskApplication 클래스 실행
 - Eclipse: Run As > Java Application

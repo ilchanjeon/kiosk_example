@@ -16,6 +16,7 @@ import java.util.Map;
 
 @Slf4j
 @Controller
+@RequestMapping("/api")
 public class KioskController {
 
     private final UltrasonicSensorService sensorService;
@@ -33,12 +34,12 @@ public class KioskController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("distance", sensorService.getCurrentDistance());
-        model.addAttribute("userDetected", sensorService.isUserDetected());
+//        model.addAttribute("distance", sensorService.getCurrentDistance());
+//        model.addAttribute("userDetected", sensorService.isUserDetected());
         return "index";
     }
 
-    @PostMapping("/api/barcode")
+    @PostMapping("/barcode")
     @ResponseBody
     public ResponseEntity<?> submitBarcode(@RequestBody Map<String, String> request) {
         String barcode = request.get("barcode");
@@ -52,7 +53,7 @@ public class KioskController {
         ));
     }
 
-    @GetMapping("/api/status")
+    @GetMapping("/status")
     @ResponseBody
     public ResponseEntity<?> getStatus() {
         sensorService.checkDistance(); // 상태 갱신
@@ -62,7 +63,7 @@ public class KioskController {
         ));
     }
 
-    @PostMapping("/api/test-print")
+    @PostMapping("/test-print")
     @ResponseBody
     public ResponseEntity<?> testPrint() {
         log.info("테스트 프린트 요청");
@@ -70,35 +71,38 @@ public class KioskController {
         return ResponseEntity.ok(Map.of("result", printerService.getStatus()));
     }
 
-    @PostMapping("/api/test")
+    @PostMapping("/test")
     @ResponseBody
     public ResponseEntity<?> apiTest() {
         ReplyFromResrc reply = restUtil.ofPost("/kiosk/api/test");
-        String result = "";
-        if(reply.isEmpty()) result = "No Content";
-        else result = reply.getReply();
-        return ResponseEntity.ok(Map.of("result", result));
+        Map<String, Object> data = new HashMap<>();
+        if(reply.isEmpty()) data.put("result", "No Content");
+        else data.put("result", reply.getReply());
+        log.debug("API TEST 응답: {}", data);
+        return ResponseEntity.ok(data);
     }
 
-    @PostMapping("/api/test2")
+    @PostMapping("/test2")
     @ResponseBody
     public ResponseEntity<?> apiTest2() {
         ReplyFromResrc reply = restUtil.ofPost("/kiosk/api/test2");
-        String result = "";
-        if(reply.isEmpty()) result = "No Content";
-        else result = reply.getReply();
-        return ResponseEntity.ok(Map.of("result", result));
+        Map<String, Object> data = new HashMap<>();
+        if(reply.isEmpty()) data.put("result", "No Content");
+        else data.put("result", reply.getReply());
+        log.debug("API TEST 응답: {}", data);
+        return ResponseEntity.ok(data);
     }
 
-    @PostMapping("/api/test3")
+    @PostMapping("/test3")
     @ResponseBody
     public ResponseEntity<?> apiTest3() {
         Map<String, Object> params = new HashMap<>();
         params.put("sampleKey", "sampleValue");
         ReplyFromResrc reply = restUtil.ofPost("/kiosk/api/test3", params);
-        String result = "";
-        if(reply.isEmpty()) result = "No Content";
-        else result = reply.getReply();
-        return ResponseEntity.ok(Map.of("result", result));
+        Map<String, Object> data = new HashMap<>();
+        if(reply.isEmpty()) data.put("result", "No Content");
+        else data.put("result", reply.getReply());
+        log.debug("API TEST 응답: {}", data);
+        return ResponseEntity.ok(data);
     }
 }
