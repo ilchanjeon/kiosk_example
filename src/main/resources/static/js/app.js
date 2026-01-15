@@ -7,8 +7,6 @@ const homeLoad = async () => {
 
     const data = await Utils.postData('/test2');
 
-    console.log(data)
-
     if (!data) {
         Utils.showError(app);
         return;
@@ -43,7 +41,7 @@ const homeLoad = async () => {
     `;
 
     Utils.loadScript('/js/pages/home.js', () => {
-        console.log('home.js가 성공적으로 로드 및 실행되었습니다.');
+        // 함수 실행도 댐
     });
 
 };
@@ -77,7 +75,7 @@ const test = async () => {
     `;
 
     Utils.loadScript('/js/pages/test.js', () => {
-        console.log('test.js가 성공적으로 로드 및 실행되었습니다.');
+        // 함수실행도 댐
     });
 
 };

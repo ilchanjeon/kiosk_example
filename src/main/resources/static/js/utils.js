@@ -29,14 +29,13 @@ const Utils = {
         const existingPageScripts = document.querySelectorAll('script[data-page-script]');
         existingPageScripts.forEach(script => {
             script.remove();
-            console.log(`페이지 스크립트 제거: ${script.src}`);
         });
 
         // 2. 새 script 요소 생성
         const script = document.createElement('script');
         script.src = src;
         script.async = true;
-        script.setAttribute('data-page-script', 'true'); // 페이지 스크립트 표시
+        script.setAttribute('data-page-script', 'true');
 
         // 3. 스크립트 로드 완료 시 콜백 함수 실행
         script.onload = () => {
