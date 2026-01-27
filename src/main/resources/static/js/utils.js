@@ -26,23 +26,24 @@ const Utils = {
     },
 
     loadScript(src, callback) {
+        // 기존 페이지 스크립트 제거
         const existingPageScripts = document.querySelectorAll('script[data-page-script]');
         existingPageScripts.forEach(script => {
             script.remove();
         });
 
-        // 2. 새 script 요소 생성
+        // 새 script 요소 생성
         const script = document.createElement('script');
         script.src = src;
         script.async = true;
         script.setAttribute('data-page-script', 'true');
 
-        // 3. 스크립트 로드 완료 시 콜백 함수 실행
+        // 스크립트 로드 완료 시 콜백 함수 실행
         script.onload = () => {
             if (callback) callback();
         };
 
-        // 4. 오류 처리
+        // 오류 처리
         script.onerror = () => {
             console.error(`스크립트 로드 실패: ${src}`);
         };

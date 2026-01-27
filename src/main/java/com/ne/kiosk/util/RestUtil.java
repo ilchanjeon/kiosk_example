@@ -18,7 +18,7 @@ public class RestUtil {
     private final MessageSource messageSource;
     private final HttpServletRequest request;
 
-    private static String resrc = "https://www.ytsports.or.kr";
+    private static String resrc = "https://ytsports.or.kr";
 
 
     public RestUtil(WebClient webClient, MessageSource messageSource, HttpServletRequest request) {
