@@ -1,0 +1,1107 @@
+main,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
+
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+audio:not([controls]) {
+  display: none;
+}
+
+[hidden] {
+  display: none;
+}
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  word-break: keep-all;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus {
+  //outline: thin dotted;
+  outline: 0;
+}
+
+a:hover,
+a:active {
+  outline: 0;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+blockquote {
+  margin: 1em 40px;
+}
+
+dfn {
+  font-style: italic;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+ins {
+  text-decoration: underline;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+mark {
+  background: #ff0;
+  font-style: italic;
+}
+
+pre,
+code,
+kbd,
+samp {
+  font-family: monospace;
+  _font-family: monospace;
+  font-size: 1em;
+}
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+p {
+  margin: 0;
+}
+
+q {
+  quotes: none;
+}
+
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+small {
+  font-size: 85%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+ul,
+ol {
+  list-style: none;
+  list-style-image: none;
+  margin: 0;
+  padding: 0;
+}
+
+dl,
+dt,
+dd {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: top;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+figure {
+  margin: 0;
+}
+
+form {
+  margin: 0;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  display: none;
+  border: 0;
+  *margin-left: -7px;
+  padding: 0;
+}
+
+label {
+  cursor: pointer;
+}
+
+button {
+  padding: 0;
+  outline: 0;
+  border: none;
+  background: transparent;
+}
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  font-family: inherit;
+  margin: 0;
+  /*vertical-align: baseline;*/
+  vertical-align: middle;
+  border-radius: 0;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(hsla(0, 0%, 100%, 0)), to(hsla(0, 0%, 100%, 0)));
+  background-image: -webkit-linear-gradient(hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, 0));
+}
+
+button,
+input {
+  line-height: normal;
+  *overflow: visible;
+}
+
+table button,
+table input {
+  *overflow: auto;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  box-sizing: content-box;
+  -webkit-appearance: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+textarea {
+  overflow: auto;
+  vertical-align: top;
+  resize: vertical;
+}
+
+input:invalid,
+textarea:invalid {
+  border-color: #C82E2D;
+}
+
+button[disabled],
+input[disabled] {
+  cursor: default;
+  //opacity: 0.5;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+}
+
+address,
+em,
+i {
+  font-style: normal;
+}
+
+caption {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden;
+  font-size: 0;
+}
+
+/*
+-----------*/
+.in_length30 {
+  width: 30px;
+}
+
+.in_length40 {
+  width: 40px;
+}
+
+.in_length50 {
+  width: 50px;
+}
+
+.in_length60 {
+  width: 60px;
+}
+
+.in_length70 {
+  width: 70px;
+}
+
+.in_length80 {
+  width: 80px;
+}
+
+.in_length90 {
+  width: 90px;
+}
+
+.in_length100 {
+  width: 100px;
+}
+
+.in_length110 {
+  width: 110px;
+}
+
+.in_length120 {
+  width: 120px;
+}
+
+.in_length130 {
+  width: 130px;
+}
+
+.in_length140 {
+  width: 140px;
+}
+
+.in_length150 {
+  width: 150px;
+}
+
+.in_length160 {
+  width: 160px;
+}
+
+.in_length170 {
+  width: 170px;
+}
+
+.in_length180 {
+  width: 180px;
+}
+
+.in_length190 {
+  width: 190px;
+}
+
+.in_length200 {
+  width: 200px;
+}
+
+.in_length250 {
+  width: 250px;
+}
+
+.in_length300 {
+  width: 300px;
+}
+
+.in_length350 {
+  width: 350px;
+}
+
+.in_length400 {
+  width: 400px;
+}
+
+.in_length450 {
+  width: 450px;
+}
+
+.in_length500 {
+  width: 500px;
+}
+
+.in_length600 {
+  width: 600px;
+}
+
+.in_length98pro {
+  width: 98%;
+}
+
+.float_wrap:after {
+  content: ' ';
+  clear: both;
+  display: block;
+  visibility: hidden;
+}
+
+*+html .float_wrap {
+  display: inline-block;
+}
+
+* html .float_wrap {
+  height: 1%;
+}
+
+.float-wrap:after {
+  content: ' ';
+  clear: both;
+  visibility: hidden;
+  display: block;
+}
+
+*+html .float-wrap {
+  display: inline-block;
+}
+
+.align_right {
+  text-align: right;
+}
+
+.align_left {
+  text-align: left;
+}
+
+.align_center {
+  text-align: center;
+}
+
+.hidden_word {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  text-indent: -9999px;
+  display: block;
+}
+
+.mgn_b5 {
+  margin-bottom: 5px;
+}
+
+.mgn_b8 {
+  margin-bottom: 8px;
+}
+
+.mgn_b10 {
+  margin-bottom: 10px;
+}
+
+.mgn_b15 {
+  margin-bottom: 15px;
+}
+
+.mgn_b18 {
+  margin-bottom: 18px;
+}
+
+.mgn_b20 {
+  margin-bottom: 20px;
+}
+
+.mgn_b25 {
+  margin-bottom: 25px;
+}
+
+.mgn_b30 {
+  margin-bottom: 30px;
+}
+
+.mgn_b40 {
+  margin-bottom: 40px;
+}
+
+.mgn_b50 {
+  margin-bottom: 50px;
+}
+
+.mgn_t5 {
+  margin-top: 5px;
+}
+
+.mgn_t8 {
+  margin-top: 8px;
+}
+
+.mgn_t10 {
+  margin-top: 10px;
+}
+
+.mgn_t15 {
+  margin-top: 15px;
+}
+
+.mgn_t18 {
+  margin-top: 18px;
+}
+
+.mgn_t20 {
+  margin-top: 20px;
+}
+
+.mgn_t25 {
+  margin-top: 25px;
+}
+
+.mgn_t30 {
+  margin-top: 30px;
+}
+
+.mgn_t40 {
+  margin-top: 40px;
+}
+
+.mgn_t50 {
+  margin-top: 50px;
+}
+
+.mgn_t70 {
+  margin-top: 70px;
+}
+
+.mgn_t80 {
+  margin-top: 80px;
+}
+
+.mgn_t105 {
+  margin-top: 105px;
+}
+
+.mgn_l10 {
+  margin-left: 10px;
+}
+
+.mgn_l15 {
+  margin-left: 15px;
+}
+
+.mgn_l20 {
+  margin-left: 20px;
+}
+
+.mgn_l30 {
+  margin-left: 30px;
+}
+
+.mgn_r10 {
+  margin-right: 10px;
+}
+
+.mgn_r20 {
+  margin-right: 20px;
+}
+
+.mgn_r30 {
+  margin-right: 30px;
+}
+
+.mgn_r40 {
+  margin-right: 40px;
+}
+
+.left_10 {
+  padding-left: 10px;
+}
+
+.left_15 {
+  padding-left: 15px;
+}
+
+.left_20 {
+  padding-left: 20px;
+}
+
+.left_30 {
+  padding-left: 30px;
+}
+
+.left_40 {
+  padding-left: 40px;
+}
+
+.left_50 {
+  padding-left: 50px;
+}
+
+.left_100 {
+  padding-left: 100px;
+}
+
+.left_150 {
+  padding-left: 150px;
+}
+
+.right_10 {
+  padding-right: 10px;
+}
+
+.right_20 {
+  padding-right: 20px;
+}
+
+.right_30 {
+  padding-right: 30px;
+}
+
+.right_50 {
+  padding-right: 50px;
+}
+
+.right_100 {
+  padding-right: 100px;
+}
+
+.right_150 {
+  padding-right: 150px;
+}
+
+.col_brown {
+  color: #996630;
+}
+
+.line_14 {
+  line-height: 1.4;
+}
+
+.line_16 {
+  line-height: 1.6;
+}
+
+.line_18 {
+  line-height: 1.8;
+}
+
+.col_red {
+  color: $red !important;
+}
+
+.col_gold {
+  color: #CD883D;
+}
+
+.col_black {
+  color: #000000;
+}
+
+.col_org {
+  color: #f05914;
+}
+
+.col_gray {
+  color: #818283;
+}
+
+.col_black {
+  color: #000;
+}
+
+.col_pul {
+  color: #3c5e80;
+}
+
+.col_blue {
+  color: #21539b;
+}
+
+.col_gold {
+  color: #999900;
+}
+
+.col_yellow {
+  color: #fff585
+}
+
+.font_bold {
+  font-weight: bold;
+}
+
+.font_11 {
+  font-size: 11px;
+  font-size: 1.1rem;
+}
+
+.font_12 {
+  font-size: 12px;
+  font-size: 1.2rem;
+}
+
+.font_13 {
+  font-size: 13px;
+  font-size: 1.3rem;
+}
+
+.font_14 {
+  font-size: 14px;
+  font-size: 1.4rem;
+}
+
+.font_15 {
+  font-size: 15px;
+  font-size: 1.5rem;
+}
+
+.font_16 {
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+
+.font_17 {
+  font-size: 17px;
+  font-size: 1.7rem;
+}
+
+.font_18 {
+  font-size: 18px;
+  font-size: 1.8rem;
+}
+
+.font_20 {
+  font-size: 20px;
+  font-size: 2.0rem;
+}
+
+.font_22 {
+  font-size: 22px;
+  font-size: 2.2rem;
+}
+
+
+.chk_box {
+  height: 13px;
+  margin: 0;
+}
+
+.chk_box,
+label {
+  vertical-align: middle;
+}
+
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot);
+  src: local('NanumGothic'), url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+    url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff2) format('x-woff2'),
+    url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff) format('woff'),
+    url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 700;
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.eot);
+  src: local('NanumGothicBold'), url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.eot?#iefix) format('embedded-opentype'),
+    url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.woff2) format('x-woff2'),
+    url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.woff) format('woff'),
+    url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 800;
+  src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.eot);
+  src: local('NanumGothicExtraBold'), url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.eot?#iefix) format('embedded-opentype'),
+    url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.woff2) format('x-woff2'),
+    url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.woff) format('woff'),
+    url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.ttf) format('truetype');
+}
+
+/* Noto Sans KR (korean) http://www.google.com/fonts/earlyaccess
+@font-face { font-family: 'Noto Sans KR'; font-style: normal; font-weight: 100; src: url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format("woff2"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format("woff"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format("opentype"); }
+@font-face { font-family: 'Noto Sans KR'; font-style: normal; font-weight: 300; src: url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format("woff2"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format("woff"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format("opentype"); }
+@font-face { font-family: 'Noto Sans KR'; font-style: normal; font-weight: 400; src: url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format("woff2"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format("woff"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format("opentype"); }
+@font-face { font-family: 'Noto Sans KR'; font-style: normal; font-weight: 500; src: url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format("woff2"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format("woff"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format("opentype"); }
+@font-face { font-family: 'Noto Sans KR'; font-style: normal; font-weight: 700; src: url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format("woff2"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format("woff"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format("opentype"); }
+@font-face { font-family: 'Noto Sans KR'; font-style: normal; font-weight: 900; src: url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format("woff2"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format("woff"), url(https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format("opentype"); }
+*/
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 100;
+  src: url(../../resources_kio/fonts/NotoSansKR-Thin.woff2) format("woff2"), url(../../resources_kio/fonts/NotoSansKR-Thin.woff) format("woff"), url(../../resources_kio/fonts/NotoSansKR-Thin.otf) format("opentype");
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 300;
+  src: url(../../resources_kio/fonts/NotoSansKR-Light.woff2) format("woff2"), url(../../resources_kio/fonts/NotoSansKR-Light.woff) format("woff"), url(../../resources_kio/fonts/NotoSansKR-Light.otf) format("opentype");
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../../resources_kio/fonts/NotoSansKR-Regular.woff2) format("woff2"), url(../../resources_kio/fonts/NotoSansKR-Regular.woff) format("woff"), url(../../resources_kio/fonts/NotoSansKR-Regular.otf) format("opentype");
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 500;
+  src: url(../../resources_kio/fonts/NotoSansKR-Medium.woff2) format("woff2"), url(../../resources_kio/fonts/NotoSansKR-Medium.woff) format("woff"), url(../../resources_kio/fonts/NotoSansKR-Medium.otf) format("opentype");
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 700;
+  src: url(../../resources_kio/fonts/NotoSansKR-Bold.woff2) format("woff2"), url(../../resources_kio/fonts/NotoSansKR-Bold.woff) format("woff"), url(../../resources_kio/fonts/NotoSansKR-Bold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-style: normal;
+  font-weight: 900;
+  src: url(../../resources_kio/fonts/NotoSansKR-Black.woff2) format("woff2"), url(../../resources_kio/fonts/NotoSansKR-Black.woff) format("woff"), url(../../resources_kio/fonts/NotoSansKR-Black.otf) format("opentype");
+}
+
+//경량된 notosans. 일어중어등등 안나올시에는 위에 주석처리된 웹폰트로 쓴다.
+
+
+
+@font-face {
+  font-family: 'yes24';
+  font-style: normal;
+  font-weight: 500;
+  src: url(../../resources_kio/fonts/yes24.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'scdream';
+  font-style: thin;
+  font-weight: 400;
+  src: url(../../resources_kio/fonts/SCDream4.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'scdream';
+  font-style: normal;
+  font-weight: 500;
+  src: url(../../resources_kio/fonts/SCDream5.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'scdream';
+  font-style: bold;
+  font-weight: 600;
+  src: url(../../resources_kio/fonts/SCDream6.woff) format("woff");
+}
+
+
+// 나눔 스퀘어
+@font-face {
+  font-family: 'NanumSquare';
+  font-style: thin;
+  font-weight: 500;
+  src: url(../../resources_kio/fonts/NanumSquare_acL.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../../resources_kio/fonts/NanumSquare_acR.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  font-style: bold;
+  font-weight: 500;
+  src: url(../../resources_kio/fonts/NanumSquare_acB.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  font-style: bolder;
+  font-weight: 600;
+  src: url(../../resources_kio/fonts/NanumSquare_acEB.woff) format("woff");
+}
+
+// 나눔바른고딕
+@font-face {
+  font-family: 'NanumBarunGothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'NanumBarunGothic';
+  font-style: normal;
+  font-weight: 700;
+  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot');
+  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf') format('truetype')
+}
+
+@font-face {
+  font-family: 'NanumBarunGothic';
+  font-style: normal;
+  font-weight: 300;
+  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
+  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'gmarket';
+  font-style: thin;
+  font-weight: 400;
+  src: url(../../resources_kio/fonts/GmarketSansTTFLight.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'gmarket';
+  font-style: normal;
+  font-weight: 500;
+  src: url(../../resources_kio/fonts/GmarketSansTTFMedium.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'gmarket';
+  font-style: bold;
+  font-weight: 700;
+  src: url(../../resources_kio/fonts/GmarketSansTTFBold.woff) format("woff");
+}
+
+
+@font-face {
+  font-family: 'jalnan';
+  font-style: normal;
+  font-weight: 500;
+  src: url(../../resources_kio/fonts/Jalnan.woff) format("woff");
+}
+
+.nanumbarungothic * {
+  font-family: 'NanumBarunGothic', sans-serif;
+}
+
+@font-face {
+  font-family: 'Sam3KRFont';
+  font-style: normal;
+  font-weight: 500;
+  src: url(../../resources_kio/fonts/Sam3KRFont.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'pretendard';
+  font-style: thin;
+  font-weight: 400;
+  src: url(../../resources_kio/fonts/Pretendard-Light.subset.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: 'pretendard';
+  font-style: normal;
+  font-weight: 500;
+  src: url(../../resources_kio/fonts/Pretendard-Regular.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: 'pretendard';
+  font-style: bold;
+  font-weight: 700;
+  src: url(../../resources_kio/fonts/Pretendard-Bold.subset.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: 'pretendard';
+  font-style: bolder;
+  font-weight: 900;
+  src: url(../../resources_kio/fonts/Pretendard-ExtraBold.subset.woff2) format("woff2");
+}
+
+
+html {
+  font-size: 62.5%;
+}
+
+html.websize-1 {
+  font-size: 62.5%;
+}
+
+html.websize-2 {
+  font-size: 68.5%;
+}
+
+html.websize-3 {
+  font-size: 72.5%;
+}
+
+html.websize-4 {
+  font-size: 78.5%;
+}
+
+html.websize-5 {
+  font-size: 82.5%;
+}
+
+html.websize-6 {
+  font-size: 88.5%;
+}
+
+html.websize-7 {
+  font-size: 93.5%;
+}
+
+.float-wrap:after {
+  content: ' ';
+  clear: both;
+  visibility: hidden;
+  display: block;
+}
+
+*+html .float-wrap {
+  display: inline-block;
+}
+
+.float_wrap:after {
+  content: ' ';
+  clear: both;
+  visibility: hidden;
+  display: block;
+}
+
+*+html .float_wrap {
+  display: inline-block;
+}
+
+/**/
+.size-realtime {
+  display: none;
+  font-size: 12px;
+  padding-left: 0 !important;
+}
+
+html.websize-1 .size-realtime.s1 {
+  display: inline-block;
+}
+
+html.websize-2 .size-realtime.s2 {
+  display: inline-block;
+}
+
+html.websize-3 .size-realtime.s3 {
+  display: inline-block;
+}
+
+html.websize-4 .size-realtime.s4 {
+  display: inline-block;
+}
+
+html.websize-5 .size-realtime.s5 {
+  display: inline-block;
+}
+
+html.websize-6 .size-realtime.s6 {
+  display: inline-block;
+}
+
+html.websize-7 .size-realtime.s7 {
+  display: inline-block;
+}
+
+//코레일체
+@font-face {
+  font-family: 'korail';
+  font-style: normal;
+  font-weight: 100;
+  src: url(../../resources_kio/fonts/korail-kyae9613.woff) format("woff")
+}

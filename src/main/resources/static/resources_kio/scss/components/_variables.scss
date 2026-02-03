@@ -1,0 +1,294 @@
+$siteSize:1200px;
+
+$red: #fe393d;
+$font1: 'pretendard','gmarket';
+$font2: 'Noto Sans KR', 'Nanum Gothic', sans-serif;
+$font3: 'NanumSquare', 'Noto Sans KR', 'Nanum Gothic', sans-serif;
+$font4: 'NanumBarunGothic', 'Nanum Gothic', 'NanumSquare', 'Noto Sans KR', sans-serif;
+$mobileTitle : 34px;
+$color1:#0e5390;
+$color2:#faff76;
+$color3:#333333;
+
+//---------------------------------------------
+
+@function str-replace($string, $search, $replace: '') {
+	$index: str-index($string, $search);
+
+	@if $index {
+		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
+
+	@return $string;
+}
+
+@function str-split($string, $separator) {
+	$split-arr: ();
+	$index: str-index($string, $separator);
+
+	@while $index !=null {
+		$item: str-slice($string, 1, $index - 1);
+		$split-arr: append($split-arr, $item);
+		$string: str-slice($string, $index + 1);
+		$index: str-index($string, $separator);
+	}
+
+	$split-arr: append($split-arr, $string);
+
+	@return $split-arr;
+}
+
+@mixin sprite($sprite, $size: 1) {
+	$sprite-offset-x: nth($sprite, 3) / $size;
+	$sprite-offset-y: nth($sprite, 4) / $size;
+	$sprite-total-width: nth($sprite, 7) / $size;
+	$sprite-width: nth($sprite, 5) / $size;
+	$sprite-height: nth($sprite, 6) / $size;
+	$sprite-image: nth($sprite, 9);
+	$sprite-name: nth($sprite, 10);
+
+	content: '';
+	vertical-align: middle;
+	display: inline-block;
+
+	background: {
+		repeat: no-repeat;
+		position: $sprite-offset-x $sprite-offset-y;
+		image: url('#{$sprite-image}');
+	};
+
+	@if ($size > 1) {
+		background-size: $sprite-total-width auto;
+	}
+
+	width: $sprite-width;
+	min-width: $sprite-width;
+	height: $sprite-height;
+}
+
+
+@mixin sprites($sprites) {
+	@each $sprite in $sprites {
+		$sprite-name: nth($sprite, 10);
+
+		@if str-index($sprite-name, '-active') {
+
+			//*:focus > .icon-#{str-replace($sprite-name, '-active', '')},
+			*:active>.icon-#{str-replace($sprite-name, '-active', '')},
+			*:hover>.icon-#{str-replace($sprite-name, '-active', '')} {
+				@include sprite($sprite);
+			}
+		}
+
+		@else {
+			.icon-#{$sprite-name} {
+				@include sprite($sprite);
+			}
+		}
+	}
+}
+
+@function size($pixels) {
+	@return $pixels;
+}
+@function ps($pixels) {
+	@return calc(#{$pixels} * 100vw / var(--vw-base));
+}
+
+@mixin hiddenWord {
+	text-indent: -9999px;
+	position: absolute;
+	top:0;
+	left:-9999px;
+	height:0;
+	overflow: hidden;
+}
+
+@mixin floatWrap {
+	&:after {
+		content: ' ';
+		clear: both;
+		display: block;
+		visibility: hidden;
+	}
+	*+ html & {
+		display: inline-block;
+	}
+}
+
+
+// font-size
+
+// @function size($pixels) {
+//     @return $pixels /10 + rem;
+// }
+
+// font-size px,rem
+
+// @mixin fontSize($pixels) {
+// 	font-size:$pixels + px;
+// 	font-size:$pixels /10 + rem;
+// }
+
+
+//고정비율 박스
+@mixin fixSize($sizeInput) {
+
+
+	& {
+		position: relative;
+		width: 100%;
+		height: 0;
+		overflow: hidden;
+		padding-bottom: $sizeInput; /*16:9*/
+		background-color:#00235d;
+		color:#fff;
+
+		&__in {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+
+		}
+		iframe { width: 100%; height: 100%}
+		img { width: 100%; height: 100% !important;
+		/* 비율 안깨지고 상하 가운데 정렬시
+		 object-fit: cover;
+		 position: absolute;
+		 top: 50%;
+		 left: 0;
+		 transform: translateY(-50%);
+		*/
+		}
+
+	}
+}
+
+@mixin scrollbar {
+	
+	&::-webkit-scrollbar {
+		width: ps(15);
+		height: ps(15);
+	}
+	
+	&::-webkit-scrollbar-track {
+		background-color: transparent;
+		overflow: hidden;
+	}
+	
+	&::-webkit-scrollbar-thumb {
+		border-radius: ps(10);
+		border-left: 0;
+		border-right: 0;
+		background-color: #fff;
+	}
+	}
+@mixin scrollbar2 {
+	
+&::-webkit-scrollbar {
+	width: ps(15);
+	height: ps(15);
+}
+
+&::-webkit-scrollbar-track {
+	background-color: transparent;
+	overflow: hidden;
+}
+
+&::-webkit-scrollbar-thumb {
+	border-radius: ps(10);
+	border-left: 0;
+	border-right: 0;
+	background-color: #0e5390;
+}
+}
+
+
+@mixin h3Type1 {
+	& {
+		color: #000;
+		font-weight: bold;
+		font-size: ps(33);
+		margin-bottom: ps(15);
+		position: relative;
+		text-align: left;
+
+	}
+}
+
+@mixin basicTable1 {
+
+	//가로형
+	& {
+		margin-bottom: ps(30);
+		border-top: ps(2) solid #232ea3;
+		font-size: ps(33);
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			
+		}
+
+		thead th {
+			background-color: #eff0fb;
+		}
+
+		th {
+			border: ps(1) solid #dcdcdc;
+			padding: ps(13) 0;
+			background-color: #fff;
+			height: ps(80);
+		}
+
+		td {
+			border: ps(1) solid #dcdcdc;
+			padding: ps(13) ps(5);
+			text-align: center;
+			vertical-align: middle;
+			background-color: #fff
+		}
+
+		&.left-td td {
+			padding-left: ps(10);
+			padding-right: ps(10);
+			text-align: left;
+		}
+
+		td.left-td {
+			padding-left: ps(10);
+			padding-right: ps(10);
+			text-align: left;
+		}
+
+	}
+
+
+}
+
+@mixin basicList {
+	& {
+		margin-bottom: 20px;
+
+		>li {
+			text-align: left;
+			position: relative;
+			padding-left: 15px;
+			line-height: 1.6;
+			margin-bottom:ps(15);
+
+			&:before {
+				position: absolute;
+				top: ps(19);
+				left: ps(0);
+				display: block;
+				content: ' ';
+				width: ps(4);
+				height: ps(4);
+				background-color: #000;
+				border-radius: 100%;
+			}
+		}
+	}
+}

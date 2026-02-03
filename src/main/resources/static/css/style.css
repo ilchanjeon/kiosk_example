@@ -1,141 +1,5 @@
 /** css **/
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: grey;
-    min-height: 100vh;
-    padding: 20px;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-h1 {
-    color: black;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.5em;
-}
-
-.panel {
-    background: whitesmoke;
-    border-radius: 15px;
-    padding: 25px;
-    margin-bottom: 20px;
-}
-
-h2 {
-    color: black;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 3px solid black;
-}
-
-.button-group {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-}
-
-button {
-    padding: 12px 24px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: bold;
-}
-
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.btn-primary {
-    background: grey;
-    color: white;
-}
-
-.btn-success {
-    background: grey;
-    color: white;
-}
-
-.status {
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    font-weight: bold;
-}
-
-.log-container {
-    background: #f8f9fa;
-    border: 2px solid #dee2e6;
-    border-radius: 8px;
-    padding: 15px;
-    height: 150px;
-    overflow-y: auto;
-    font-size: 12px;
-}
-
-.sensorLog {
-    height: 320px;
-}
-
-.log-time {
-    color: #6c757d;
-    margin-right: 10px;
-}
-
-.distance-display {
-    text-align: center;
-    padding: 5px;
-    background: grey;
-    border-radius: 10px;
-    margin: 10px 0;
-}
-
-.distance-value {
-    font-size: 1.5em;
-    color: white;
-    font-weight: bold;
-}
-
-.distance-unit {
-    font-size: 1em;
-    color: rgba(255,255,255,0.9);
-    margin-top: 10px;
-}
-
-input[type="text"] {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #dee2e6;
-    border-radius: 8px;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-input[type="text"]:focus {
-    outline: none;
-    border-color: #667eea;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
 .modal {
     display: none;
     position: fixed;
@@ -167,8 +31,7 @@ input[type="text"]:focus {
 
 .modal-input {
     width: 100%;
-    padding: 15px;
-    font-size: 18px;
+    font-size: 1.5em;
     border: 2px solid #dee2e6;
     border-radius: 8px;
     margin-bottom: 15px;
@@ -183,6 +46,24 @@ input[type="text"]:focus {
 
 .modal-buttons button {
     flex: 1;
+}
+
+.btn-cancel {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    background: white;
+}
+
+.btn-sumbmit {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    background: white;
 }
 
 .numpad {
@@ -228,6 +109,108 @@ input[type="text"]:focus {
     border-color: #c0392b;
 }
 
-.test-buttons {
+.alert-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
     justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.alert-content {
+    background: white;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 500px;
+    animation: slideDown 0.3s ease-out;
+}
+
+.alert-content p {
+    font-size: 24px;
+    color: #333;
+    margin: 0 0 30px 0;
+    line-height: 1.5;
+}
+
+.alert-content button {
+    background-color: #2d3691;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.alert-content button:focus {
+    outline: 5px solid #faeb00;
+    outline-offset: 0.5px;
+    background-color: #0056b3;
+}
+
+.alert-content button:hover {
+    background-color: #202850;
+}
+
+.alert-content button:active {
+    transform: scale(0.98);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: white;
+    font-size: 24px;
+}
+
+.loading::before {
+    content: '';
+    width: 60px;
+    height: 60px;
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#barcodeInput {
+    position: absolute;
+    top: -1000px;
+    left: -1000px;
+    opacity: 0;
 }

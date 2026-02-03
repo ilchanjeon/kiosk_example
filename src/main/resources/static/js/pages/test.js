@@ -1,1 +1,0 @@
-console.log("Test 페이지 스크립트 로드됨");

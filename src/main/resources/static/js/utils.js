@@ -17,16 +17,16 @@ const Utils = {
         }
     },
 
-    showLoading(container) {
-        container.innerHTML = '<div class="loading">로딩 중...</div>';
+    showLoading(container,) {
+        container.innerHTML = '<div class="loading">잠시만 기다려주세요.</div>';
     },
 
     showError(container, message = '데이터를 불러올 수 없습니다.') {
-        container.innerHTML = `<div class="error">${message}</div>`;
+        container.innerHTML = `<div class="loading">${message}</div>`;
     },
 
     loadScript(src, callback) {
-        // 기존 페이지 스크립트 제거
+        //기존 페이지 스크립트 제거
         const existingPageScripts = document.querySelectorAll('script[data-page-script]');
         existingPageScripts.forEach(script => {
             script.remove();
@@ -48,7 +48,9 @@ const Utils = {
             console.error(`스크립트 로드 실패: ${src}`);
         };
 
-        // 5. DOM에 추가하여 로드 및 실행 트리거
-        document.head.appendChild(script);
+        // DOM에 추가하여 로드 및 실행 트리거
+        document.body.appendChild(script);
     }
+
+
 };

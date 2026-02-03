@@ -4,20 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" th:href="@{/resources_kio/styles/style.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+
     <script th:src="@{/js/global.js}"></script>
     <script th:src="@{/js/utils.js}"></script>
+    <script th:src="@{/resources_kio/scripts/jquery.js}"></script>
+    <script th:src="@{/resources_kio/scripts/jquery-migrate-3.3.2.js}"></script>
+    <script th:src="@{/resources_kio/scripts/jquery.cookie.js}"></script>
+    <script th:src="@{/resources_kio/scripts/slick.min.js}"></script>
+    <script th:src="@{/resources_kio/scripts/site.js}"></script>
 
-    <title>키오스크 시스템</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <title>영통복합체육센터</title>
 </head>
 <body>
-    <button style="margin-bottom: 50px; margin-right: 30px; opacity: 0;" onclick="handleSecretClick();"> </button>
-
+    <button style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: auto; cursor: default;" onclick="handleSecretClick();">password</button>
     <main id="app"></main>
-
     <div id="passwordModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">비밀번호</div>
+            <div class="modal-header">관리자 비밀번호</div>
             <input type="password" id="passwordInput" class="modal-input" placeholder="비밀번호 입력" maxlength="10">
             <div class="numpad">
                 <button class="numpad-btn" onclick="addPasswordDigit('1')">1</button>
@@ -34,12 +42,17 @@
                 <button class="numpad-btn" onclick="deleteLastDigit()">⌫</button>
             </div>
             <div class="modal-buttons">
-                <button class="btn-danger" onclick="closePasswordModal()">취소</button>
-                <button class="btn-primary" onclick="checkPassword()">확인</button>
+                <button class="btn-cancel" onclick="closePasswordModal()">취소</button>
+                <button class="btn-sumbmit" onclick="checkPassword()">확인</button>
             </div>
         </div>
     </div>
-
-    <script th:src="@{/js/app.js}"></script>
+    <div class="alert-box" id="alert" style="display: none;">
+        <div class="alert-content">
+            <p id="alert-message"></p>
+            <button onclick="closeAlert()">닫기</button>
+        </div>
+    </div>
 </body>
+<script th:src="@{/js/app.js}"></script>
 </html>
