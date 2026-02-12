@@ -35,7 +35,7 @@ public class BarcodeInputService {
 
         // 바코드 처리
         try {
-            printerService.printReceipt(barcode);
+//            printerService.printReceipt(barcode);
             inputEnabled.set(true);
 
         } catch (Exception e) {

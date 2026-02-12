@@ -2681,7 +2681,7 @@ html body {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
-  max-width: calc(197 * 100vw / var(--vw-base));
+  max-width: calc(450 * 100vw / var(--vw-base));
   height: calc(223 * 100vw / var(--vw-base));
   background-color: #fff;
   border-radius: calc(20 * 100vw / var(--vw-base));

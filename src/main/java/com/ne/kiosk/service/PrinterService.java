@@ -44,7 +44,7 @@ public class PrinterService {
 
     private boolean status = false;
 
-    public void printReceipt(String barcode) {
+    public void printReceipt(String cardno, String tamt, String trandate, String trantime, String authno, String reqinst, String trantype) {
         if (!deviceManager.isPortOpen("printer")) {
             log.error("프린터가 연결되지 않았습니다");
             return;
@@ -57,49 +57,81 @@ public class PrinterService {
                 return;
             }
 
-            log.info("영수증 출력 시작 - 바코드: {}", barcode);
+            String tax = String.valueOf(Integer.parseInt(tamt) / 10);
+            String amt = String.valueOf(Integer.parseInt(tamt) - (Integer.parseInt(tax)));
+            tamt = String.valueOf(Integer.parseInt(tamt));
 
             // 초기화
             os.write(INIT);
             Thread.sleep(100);
 
             // 헤더
+            os.write(LINE_FEED);
+            os.write(LINE_FEED);
             os.write(ALIGN_CENTER);
             os.write(SIZE_DOUBLE);
             os.write(BOLD_ON);
-            printText(os, "키오스크 테스트");
+            if(trantype.equals("payment")) {
+                printText(os, "[카드승인전표]");
+            } else {
+                printText(os, "[카드취소전표]");
+            }
             os.write(LINE_FEED);
             os.write(BOLD_OFF);
             os.write(SIZE_NORMAL);
             os.write(LINE_FEED);
 
             // 구분선
-            os.write(ALIGN_LEFT);
-            printText(os, "================================");
+            os.write(ALIGN_CENTER);
+            printText(os, "===========================================");
             os.write(LINE_FEED);
 
-            // 바코드 정보
-            printText(os, "스캔된 바코드:");
+            // 거래 정보
+            os.write(ALIGN_LEFT);
+            printText(os, "카드 종류: " + reqinst);
             os.write(LINE_FEED);
+            printText(os, "카드 번호: " + cardno);
+            os.write(LINE_FEED);
+            printText(os, "거래 일시: " + trandate + " " + trantime);
+            os.write(LINE_FEED);
+            printText(os, "승인 번호: " + authno);
+            os.write(LINE_FEED);
+
+            // 구분선
+            os.write(ALIGN_CENTER);
+            printText(os, "--------------------------------------------");
+            os.write(LINE_FEED);
+
+            // 금액 정보
+            os.write(ALIGN_LEFT);
             os.write(BOLD_ON);
             os.write(SIZE_DOUBLE);
-            printText(os, barcode);
+            printText(os, "금 액          " + amt + " 원");
             os.write(LINE_FEED);
+            printText(os, "부가세          " + tax + " 원");
+            os.write(LINE_FEED);
+            printText(os, "합 계          " + tamt  + " 원");
             os.write(BOLD_OFF);
             os.write(SIZE_NORMAL);
             os.write(LINE_FEED);
 
-            // 시간 정보
-            String timestamp = LocalDateTime.now()
-                    .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-            printText(os, "출력 시간: " + timestamp);
+            // 구분선
+            os.write(ALIGN_CENTER);
+            printText(os, "--------------------------------------------");
             os.write(LINE_FEED);
 
             // 푸터
-            printText(os, "================================");
+            os.write(ALIGN_LEFT);
+            printText(os, "상호: 수원시체육회(영통복합체육관)");
             os.write(LINE_FEED);
-            os.write(ALIGN_CENTER);
-            printText(os, "감사합니다!");
+            printText(os, "주소: 경기도 수원시 장안구 경수대로 893 (조원동 775)");
+            os.write(LINE_FEED);
+            printText(os, "대표자: 박광국");
+            os.write(LINE_FEED);
+            printText(os, "전화번호: 031-241-0334");
+            os.write(LINE_FEED);
+            printText(os, "사업자등록번호: 2558200310");
+            os.write(LINE_FEED);
             os.write(LINE_FEED);
             os.write(LINE_FEED);
             os.write(LINE_FEED);
@@ -123,11 +155,71 @@ public class PrinterService {
         os.write(bytes);
     }
 
-    public void testPrint() {
-        printReceipt("TESTPRINT123456");
-    }
-
     public boolean getStatus() {
         return status;
+    }
+
+    public void enterPrint(String name, Integer quantity) {
+        if (!deviceManager.isPortOpen("printer")) {
+            log.error("프린터가 연결되지 않았습니다");
+            return;
+        }
+
+        try {
+            OutputStream os = deviceManager.getOutputStream("printer");
+            if (os == null) {
+                log.error("프린터 출력 스트림을 가져올 수 없습니다");
+                return;
+            }
+
+            // 초기화
+            os.write(INIT);
+            Thread.sleep(100);
+
+            // 헤더
+            os.write(LINE_FEED);
+            os.write(LINE_FEED);
+            os.write(ALIGN_CENTER);
+            os.write(SIZE_DOUBLE);
+            os.write(BOLD_ON);
+            printText(os, "[입장권]");
+            os.write(LINE_FEED);
+            printText(os, name);
+            os.write(LINE_FEED);
+            os.write(BOLD_OFF);
+            os.write(SIZE_NORMAL);
+            os.write(LINE_FEED);
+
+            // 구분선
+            os.write(ALIGN_CENTER);
+            printText(os, "===========================================");
+            os.write(LINE_FEED);
+
+            // 거래 정보
+            os.write(ALIGN_CENTER);
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            printText(os, timestamp);
+            os.write(LINE_FEED);
+            printText(os, "구매 수량: " + quantity);
+            os.write(LINE_FEED);
+
+            // 구분선
+            os.write(ALIGN_CENTER);
+            printText(os, "--------------------------------------------");
+            os.write(LINE_FEED);
+            os.write(LINE_FEED);
+            os.write(LINE_FEED);
+            os.write(LINE_FEED);
+            // 용지 자르기
+            os.write(CUT_PAPER);
+
+            os.flush();
+            log.info("영수증 출력 완료");
+            status = true;
+
+        } catch (Exception e) {
+            log.error("프린터 출력 오류: {}", e.getMessage(), e);
+            status = false;
+        }
     }
 }

@@ -24,7 +24,10 @@ const homeLoad = async () => {
 
     Utils.showLoading(app);
 
-    const data = await Utils.postData('/test2');
+    const data = await Utils.postData('/test2', {
+        'data': '123',
+        'temp': '456'
+    });
 
     if (!data) {
         Utils.showError(app);
@@ -374,51 +377,38 @@ const onedayClassBuying = async () => {
                                 <div class="product-box__cont js-product-box--1">
                                     <div class="product-box__cont__item">
                                         <div>
-                                            <button type="button">
-                                                <p>탁구 주간<br>(화/목)</p>
-                                                <span>1,200원</span>
+                                            <button type="button" class="event1" onclick="addPaymentList('탁구 주간 (일반)', 1500);">
+                                                <p>탁구 주간<br>(일반)</p>
+                                                <span>1,500원</span>
                                             </button>
                                         </div>
                                         <div>
-                                            <button type="button">
-                                                <p>탁구 주간<br>(월/수)</p>
-                                                <span>1,200원</span>
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <button type="button">
-                                                <p>탁구 주간<br>(목/금)</p>
-                                                <span>1,200원</span>
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <button type="button">
-                                                <p>탁구 주간<br>(화/목)</p>
-                                                <span>1,200원</span>
+                                            <button type="button" class="event2" onclick="addPaymentList('탁구 주간 (할인)', 1000);">
+                                                <p>탁구 주간<br>(할인)</p>
+                                                <span>1,000원</span>
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="product-box__cont__item">
-                                        <div>
-                                            <button type="button" class="event1">
-                                                <p>탁구 주간<br>(화/목)</p>
-                                                <span>1,200원</span>
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <button type="button" class="event2">
-                                                <p>탁구 주간<br>(월/수)</p>
-                                                <span>1,200원</span>
-                                            </button>
-                                        </div>
-                                    
-                                    </div>
+<!--                                    <div class="product-box__cont__item">-->
+<!--                                        <div>-->
+<!--                                            <button type="button" class="event1">-->
+<!--                                                <p>탁구 야간<br>(일반)</p>-->
+<!--                                                <span>1,000원</span>-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                        <div>-->
+<!--                                            <button type="button" class="event2">-->
+<!--                                                <p>탁구 야간<br>(할인)</p>-->
+<!--                                                <span>500원</span>-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                 </div>
                                 <div class="slide-nav">
                                     <span class="s_prev"><a href="#"
-                                            onclick="jQuery('.js-product-box--1').slick('slickPrev');return false;">이전</a></span>
+                                            onclick="jQuery('.js-product-box--1').slick('slickPrev'); return false;">이전</a></span>
                                     <span class="s_next"><a href="#"
-                                            onclick="jQuery('.js-product-box--1').slick('slickNext');return false;">다음</a></span>
+                                            onclick="jQuery('.js-product-box--1').slick('slickNext'); return false;">다음</a></span>
                                 </div>
                             </article>
                         </div>
@@ -427,118 +417,42 @@ const onedayClassBuying = async () => {
                                 <div class="product-box__cont js-product-box--2">
                                     <div class="product-box__cont__item">
                                         <div>
-                                            <button type="button">
-                                                <p>배드민턴 주간<br>(화/목)</p>
-                                                <span>1,200원</span>
+                                            <button type="button" class="event1" onclick="addPaymentList('배드민턴 주간 (일반)', 1500);">
+                                                <p>배드민턴 주간<br>(일반)</p>
+                                                <span>1,500원</span>
                                             </button>
                                         </div>
                                         <div>
-                                            <button type="button">
-                                                <p>배드민턴 주간<br>(월/수)</p>
-                                                <span>1,200원</span>
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <button type="button">
-                                                <p>배드민턴 주간<br>(목/금)</p>
-                                                <span>1,200원</span>
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <button type="button">
-                                                <p>배드민턴 주간<br>(화/목)</p>
-                                                <span>1,200원</span>
+                                            <button type="button" class="event2" onclick="addPaymentList('배트민턴 주간 (할인)', 1000);">
+                                                <p>배드민턴 주간<br>(할인)</p>
+                                                <span>1,000원</span>
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="product-box__cont__item">
-                                        <div>
-                                            <button type="button">
-                                                <p>배드민턴 주간<br>(화/목)</p>
-                                                <span>1,200원</span>
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <button type="button">
-                                                <p>배드민턴 주간<br>(월/수)</p>
-                                                <span>1,200원</span>
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <button type="button">
-                                                <p>배드민턴 주간<br>(목/금)</p>
-                                                <span>1,200원</span>
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <button type="button">
-                                                <p>배드민턴 주간<br>(화/목)</p>
-                                                <span>1,200원</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="product-box__cont__item">
-                                        <div>
-                                            <button type="button" class="event1">
-                                                <p>배드민턴 주간<br>(화/목)</p>
-                                                <span>1,200원</span>
-                                            </button>
-                                        </div>
-                                        <div>
-                                            <button type="button" class="event2">
-                                                <p>배드민턴 주간<br>(월/수)</p>
-                                                <span>1,200원</span>
-                                            </button>
-                                        </div>
-                                    </div>
+<!--                                    <div class="product-box__cont__item">-->
+<!--                                        <div>-->
+<!--                                            <button type="button" class="event1">-->
+<!--                                                <p>배드민턴 야간<br>(일반)</p>-->
+<!--                                                <span>1,000원</span>-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                        <div>-->
+<!--                                            <button type="button" class="event2">-->
+<!--                                                <p>배드민턴 야간<br>(할인)</p>-->
+<!--                                                <span>500원</span>-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                 </div>
                                 <div class="slide-nav">
                                     <span class="s_prev"><a href="#"
-                                            onclick="jQuery('.js-product-box--2').slick('slickPrev');return false;">이전</a></span>
+                                            onclick="jQuery('.js-product-box--2').slick('slickPrev'); return false;">이전</a></span>
                                     <span class="s_next"><a href="#"
-                                            onclick="jQuery('.js-product-box--2').slick('slickNext');return false;">다음</a></span>
+                                            onclick="jQuery('.js-product-box--2').slick('slickNext'); return false;">다음</a></span>
                                 </div>
                             </article>
                         </div>
                     </div>
-    
-                    <script>
-                        productSlide('.js-product-box--1');
-                        productSlide('.js-product-box--2');
-                        // productSlide('.js-product-box--3');
-                        // productSlide('.js-product-box--4');
-                        // productSlide('.js-product-box--5');
-                        // productSlide('.js-product-box--6');
-                    </script>
-                    <script>
-                        function ProductTab(tabName) {
-                            var oldIndex = 0
-    
-                            var firstTabItem = $(tabName).find('.js-nav__list.on')
-    
-                            $(tabName)
-                                .find('.js-nav__list')
-                                .on('click', function () {
-                                    var thisIndex = $(tabName).find('.js-nav__list').index(this)
-                                    var tabItem = $(tabName).find('.js-nav__list')
-                                    var boxItem = $(tabName).find('.js-box')
-    
-                                    tabItem.removeClass('on');
-                                    boxItem.removeClass('on')
-                                    tabItem.eq(thisIndex).addClass('on');
-                                    boxItem.eq(thisIndex).addClass('on');
-    
-                                    $('.js-product-box--1').get(0).slick.setPosition()
-                                    $('.js-product-box--2').get(0).slick.setPosition()
-                                    $('.js-product-box--3').get(0).slick.setPosition()
-                                    $('.js-product-box--4').get(0).slick.setPosition()
-                                    $('.js-product-box--5').get(0).slick.setPosition()
-                                    $('.js-product-box--6').get(0).slick.setPosition()
-                                    return false
-                                })
-                        }
-                        ProductTab('.js-tab-box--2') // 탭 작동
-                    </script>
                 </div>
             </div>
             <div class="sub-box_in2">
@@ -549,7 +463,7 @@ const onedayClassBuying = async () => {
                                 <h5>결제금액</h5>
                             </div>
                             <div class="con">
-                                <em>1,200원</em>
+                                <em id="finalAmount" >0 원</em>
                             </div>
                         </div>
                         <div class="payment-top-right">
@@ -574,36 +488,13 @@ const onedayClassBuying = async () => {
                                         <p class="item3">금액<span>Amount</span></p>
                                     </div>
                                 </div>
-                                <div class="bottom">
-                                    <div class="item-box">
-                                        <button type="button">
-                                            <p class="item1">피트니스 주간</p>
-                                            <p class="item2">1</p>
-                                            <p class="item3">1,200원</p>
-                                        </button>
-                                    </div>
-                                    <div class="item-box">
-                                        <button type="button">
-                                            <p class="item1">피트니스할인<br>
-                                                (남자대인)</p>
-                                            <p class="item2">1</p>
-                                            <p class="item3">1,200원</p>
-                                        </button>
-                                    </div>
-                                    <div class="item-box">
-                                        <button type="button">
-                                            <p class="item1">피트니스할인<br>
-                                                (남자대인)</p>
-                                            <p class="item2">1</p>
-                                            <p class="item3">1,200원</p>
-                                        </button>
-                                    </div>
+                                <div class="bottom" id="paymentList">
                                 </div>
                             </div>
                         </div>
                         <div class="payment-bottom-right">
                             <div class="check">
-                                <a href="#" onclick="reloadPage('home'); retrun false;">
+                                <a href="#" onclick="Transaction(1); return false;">
                                     <p>결제하기</p>
                                     <span>Card payment</span>
                                 </a>
@@ -685,7 +576,7 @@ const payCancel1 = async () => {
     
                     <div class="bottom-btn">
                         <a href="#" onclick="reloadPage('home'); return false;" class="back"><i></i>취소</a>
-                        <a href="#" onclick="reloadPage('cancel2'); return false;" class="check"><i></i>확인</a>
+                        <a href="#" onclick="cancelPasswordCheck(); return false;" class="check"><i></i>확인</a>
                     </div>
                 </div>
             </div>
@@ -706,12 +597,23 @@ const payCancel2 = async () => {
 
     Utils.showLoading(app);
 
-    const data = await Utils.postData('/test');
+    const data = await Utils.postData('/findPaymentList');
 
     if (!data) {
         Utils.showError(app);
         return;
     }
+
+    if(data.result === "No Content") {
+        showAlert2("취소할 결제내역이 없습니다.");
+        setTimeout(() => {
+            closeAlert2();
+            homeLoad();
+        }, 1000);
+        return;
+    }
+
+    let resultArray = JSON.parse(data.result);
 
     app.innerHTML = `
         <div class="sub-box">
@@ -725,21 +627,29 @@ const payCancel2 = async () => {
     
                     <div class="cancel-list">
                         <ul>
-                            <li><button>28630752 202860126151657<span class="sum">(3000원)</span></button></li>
-                            <li><button>28630752 202860126151657<span class="sum">(3000원)</span></button></li>
-                            <li><button>28630752 202860126151657<span class="sum">(3000원)</span></button></li>
-                            <li><button>28630752 202860126151657<span class="sum">(3000원)</span></button></li>
+                            ${resultArray.map(item => {
+                                const numericAmount = parseInt(item.TAMT || "0", 10);
+                                const formattedAmount = numericAmount.toLocaleString("ko-KR");
+                                return `
+                                <li>
+                                    <button id="${item.OFF_PAYMENT_MANAGEMENT_NO}" data-authno="${item.AUTHNO}" data-tamt="${numericAmount}" data-trandate="${item.TRANDATE}">
+                                        ${item.AUTHNO}
+                                        <span class="sum">(${formattedAmount} 원)</span>
+                                    </button>
+                                </li>
+                            `;
+                            }).join('')}
                         </ul>
                     </div>
     
                     <div class="bottom-btn">
                         <a href="#" onclick="reloadPage('cancel1'); return false;" class="back"><i></i>이전</a>
-                        <a href="#" onclick="return false;" class="check"><i></i>다음</a>
+                        <a href="#" onmousedown="event.preventDefault();" onclick="cancelPayment(); return false;" class="check"><i></i>다음</a>
                         <a href="#" onclick="reloadPage('home'); return false;" class="home"><i></i>첫화면으로</a>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>WWWW
     `;
 
     Utils.loadScript('/js/pages/cancel2.js', () => {

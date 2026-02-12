@@ -218,6 +218,21 @@ function closeAlert() {
     document.removeEventListener('keydown', handleAlertKey);
 }
 
+// 닫기 없는 알림창 보이기
+function showAlert2(message) {
+    document.getElementById('alertNone').style.display = 'flex';
+    document.getElementById('alert-message2').textContent = message;
+
+    document.addEventListener('keydown', handleAlertKey);
+}
+
+// 닫기 없는 알림창 숨기기
+function closeAlert2() {
+    document.getElementById('alertNone').style.display = 'none';
+
+    document.removeEventListener('keydown', handleAlertKey);
+}
+
 function handleAlertKey(e) {
     const closeBtn = document.querySelector('#alert button');
 
@@ -232,55 +247,63 @@ function handleAlertKey(e) {
 
     // Enter 키로 닫기
     if (e.key === 'Enter' && document.activeElement === closeBtn) {
-        console.log("hi");
         closeAlert();
     }
 }
 
 function forceCloseWindow() {
-    // 반드시 사용자 제스처(클릭 등)에서 호출해야 허용되는 경우가 많음.
+
     try {
-        // 기본 시도
         window.close();
         if (window.closed) return true;
     } catch (e) {}
 
     try {
-        // 시도 2: 자기 자신을 새창으로 열어 닫기
         window.open('', '_self');
         window.close();
         if (window.closed) return true;
     } catch (e) {}
 
     try {
-        // 시도 3: 부모/상위 대상으로 시도
         window.open('', '_parent');
         window.close();
         if (window.closed) return true;
     } catch (e) {}
 
     try {
-        // 시도 4: about:blank 로 대체한 뒤 닫기 시도 (대체 후 브라우저가 허용하면 닫힘)
         window.location.replace('about:blank');
         setTimeout(function () {
             try { window.close(); } catch (e) {}
         }, 100);
-        return true; // 리다이렉트는 수행됨
+        return true;
     } catch (e) {}
 
-    // 마지막 보루(브라우저 정책상 여전히 막히는 경우가 존재함)
-    // 새 탭을 열어 바로 닫는 방식(일부 환경에서 유효) — 사용자 제스처 필요
     try {
         var tmp = window.open('about:blank', '_blank');
         if (tmp) {
             tmp.close();
-            // 현재 창은 닫을 수 없으므로 about:blank 로 이동
             window.location.replace('about:blank');
             return true;
         }
     } catch (e) {}
 
-    return false; // 모든 시도 실패
+    return false;
+}
+
+function cancelPasswordCheck() {
+    const first = document.getElementById('first').value;
+    const second = document.getElementById('second').value;
+    const third = document.getElementById('third').value;
+    const fourth = document.getElementById('fourth').value;
+
+    if (first + second + third + fourth === ADMIN_PASSWORD) reloadPage('cancel2');
+    else {
+        showAlert('비밀번호가 올바르지 않습니다.');
+        first.value = '';
+        second.value = '';
+        third.value = '';
+        fourth.value = '';
+    }
 }
 
 /**
@@ -320,5 +343,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // homeLoad();  // 메인 페이지 로드
 });

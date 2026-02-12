@@ -7,6 +7,7 @@ document.querySelectorAll('.item-btn.number').forEach(button => {
         for (const input of inputs) {
             if (!input.value) { // 비어 있는 첫 번째 입력 필드에 값 채우기
                 input.value = number;
+                input.type = 'password';
                 break;
             }
         }
@@ -53,6 +54,10 @@ $(function () {
 
     $(document).on('keydown', function (e) {
         const key = e.key;
+
+        if (document.getElementById('alert').style.display === 'flex') {
+            return;
+        }
 
         if (key === 'ArrowRight' || key === 'ArrowDown') {
             e.preventDefault();
