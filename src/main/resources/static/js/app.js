@@ -191,13 +191,13 @@ const monthMemberSumbmit = async () => {
                             </div>
                             <div class="bottom js-list-box">
                                 ${educationList.length > 0 ? educationList.map(item => {
-                                    const numericAmount = parseInt(item.EDUCATION_TUITION || "0", 10);
+                                    const numericAmount = parseInt(item.educationTuition || "0", 10);
                                     const formattedAmount = numericAmount.toLocaleString("ko-KR");
                                     return `
-                                            <button class="item-box" data-educationNo="${item.EDUCATION_INFO_NO}" data-price="${item.EDUCATION_TUITION}" data-useEndDate="" data-type="education" data-esntlId="${esntlId}">
-                                                <p class="item1">${item.EDUCATION_NAME}</p>
-                                                <p class="item2">${item.EDUCATION_START_DATE}</p>
-                                                <p class="item3">${item.EDUCATION_END_DATE}</p>
+                                            <button class="item-box" data-educationNo="${item.educationInfoNo}" data-price="${item.educationTuition}" data-useEndDate="" data-type="education" data-esntlId="${esntlId}">
+                                                <p class="item1">${item.educationName}</p>
+                                                <p class="item2">${item.educationStartDate}</p>
+                                                <p class="item3">${item.educationEndDate}</p>
                                                 <p class="item4">${formattedAmount}</p>
                                             </button>
                                         `;
