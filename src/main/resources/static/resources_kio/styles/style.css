@@ -2356,7 +2356,7 @@ html body {
 
 .cont-box.page3 .mem-box .bottom {
   width: calc(100% - 10.5%);
-  height: calc(405 * 100vw / var(--vw-base));
+  height: calc(945 * 100vw / var(--vw-base));
   overflow: hidden;
   background-color: #f7f6f6;
 }
@@ -2504,6 +2504,30 @@ html body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.cont-box.page3 .bottom-btn .memberCheck {
+  width: 100%;
+  height: calc(165 * 100vw / var(--vw-base));
+  border-radius: calc(40 * 100vw / var(--vw-base));
+  background-color: #5db77e;
+  color : #ffffff;
+  font-size: calc(70 * 100vw / var(--vw-base));
+  font-weight: 700;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-bottom: 2vw;
+}
+
+.cont-box.page3 .bottom-btn .memberCheck:focus {
+  background-color: #2d7a4a;
 }
 
 .cont-box.page3 .bottom-btn .back:focus, .cont-box.page3 .bottom-btn .back.is-focus {

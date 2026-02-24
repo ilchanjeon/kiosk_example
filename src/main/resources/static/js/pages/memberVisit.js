@@ -12,24 +12,24 @@ document.querySelectorAll('.item-btn.number').forEach(button => {
         }
     });
 });
-// "재입력" 버튼 클릭 시 모든 입력값 초기화
-document.querySelector('.item-btn.initi').addEventListener('click', () => {
-    const inputs = document.querySelectorAll('input[onlyNumber]');
-    inputs.forEach(input => {
-        input.value = '';
-    });
-});
+// // "재입력" 버튼 클릭 시 모든 입력값 초기화
+// document.querySelector('.item-btn.initi').addEventListener('click', () => {
+//     const inputs = document.querySelectorAll('input[onlyNumber]');
+//     inputs.forEach(input => {
+//         input.value = '';
+//     });
+// });
 
-// "정정" 버튼 클릭 시 마지막 입력된 값을 제거
-document.querySelector('.item-btn.delete').addEventListener('click', () => {
-    const inputs = Array.from(document.querySelectorAll('input[onlyNumber]'));
-    for (let i = inputs.length - 1; i >= 0; i--) {
-        if (inputs[i].value) { // 값이 있는 마지막 필드를 비움
-            inputs[i].value = '';
-            break;
-        }
-    }
-});
+// // "정정" 버튼 클릭 시 마지막 입력된 값을 제거
+// document.querySelector('.item-btn.delete').addEventListener('click', () => {
+//     const inputs = Array.from(document.querySelectorAll('input[onlyNumber]'));
+//     for (let i = inputs.length - 1; i >= 0; i--) {
+//         if (inputs[i].value) { // 값이 있는 마지막 필드를 비움
+//             inputs[i].value = '';
+//             break;
+//         }
+//     }
+// });
 
 listBox('.js-list-box');
 
@@ -106,3 +106,52 @@ $(function () {
         $(this).addClass('is-focus');
     });
 });
+
+function showOverRay() {
+    document.getElementById('overRay').style.display = 'flex';
+}
+
+// 알림창 숨기기
+function closeOverRay() {
+    document.getElementById('overRay').style.display = 'none';
+}
+
+
+/**
+ * 선택한 강좌 출석체크
+ */
+async function attendance() {
+    const selected = document.querySelector('input[name="select_no"]:checked');
+    let educationNo = '';
+    let selectedType = '';
+
+    if (selected) {
+        educationNo = selected.value;
+        selectedType = selected.dataset.type;
+    } else {
+        showAlert("선택된 수업이 없습니다.");
+    }
+    showOverRay();
+
+    const data = await Utils.postData('/insertAttendance', {
+        'education_no' : educationNo,
+        'selected_type' : selectedType
+    });
+
+    if (data.result == 'already') {
+        closeOverRay();
+        showAlert2('이미 출석체크를 하였습니다.');
+        setTimeout(() => {
+            closeAlert2();
+            homeLoad();
+        }, 3000);
+    }
+    else if (data.result == 'success') {
+        closeOverRay();
+        showAlert2('출석체크 완료');
+        setTimeout(() => {
+            closeAlert2();
+            homeLoad();
+        }, 3000);
+    }
+}

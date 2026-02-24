@@ -20,19 +20,7 @@ const reloadPage = async (pageName) => {
 const homeLoad = async () => {
     const app = document.getElementById('app');
 
-    const barcode = sessionStorage.getItem('barcode');
-
     Utils.showLoading(app);
-
-    const data = await Utils.postData('/test2', {
-        'data': '123',
-        'temp': '456'
-    });
-
-    if (!data) {
-        Utils.showError(app);
-        return;
-    }
 
     app.innerHTML = `
         <div class="main-box">
@@ -100,12 +88,85 @@ const monthMemberSumbmit = async () => {
     Utils.showLoading(app);
 
     const barcode = sessionStorage.getItem('barcode');
-    const data = await Utils.postData('/barcode', { barcode: barcode });
+    const data = await Utils.postData('/findMonthlyRegist', { barcode: barcode });
 
     if (!data) {
         Utils.showError(app);
         return;
     }
+
+    let pingpong = false;
+    let badminton = false;
+    let educationList = [];
+    let ticketList = [];
+    let esntlId = "";
+
+    if(data.result === "No Content") {
+        showAlert2("오류가 발생하였습니다.");
+        setTimeout(() => {
+            closeAlert2();
+            homeLoad();
+        }, 1000);
+        return;
+    }
+    else if(data.result === "noMember") {
+        showAlert2("일치하는 회원이 없습니다.");
+        setTimeout(() => {
+            closeAlert2();
+            homeLoad();
+        }, 1000);
+        return;
+    }
+    else if(data.result === "usedTicket_all"){
+        showAlert2("갱신할 교육이 없습니다.");
+        setTimeout(() => {
+            closeAlert2();
+            homeLoad();
+        }, 1000);
+        return;
+    } else {
+        let resultArray = JSON.parse(data.result);
+
+        esntlId = resultArray.esntlId;
+
+        if(resultArray.result === 'noList') {
+            // 배드민턴, 탁구 추가
+            pingpong = true;
+            badminton = true;
+        } else if (resultArray.result === "find") {
+            if(resultArray.usedTicket === "usedTicket_T"){
+                // 배드민턴 추가
+                badminton = true;
+            } else {
+                // 탁구 추가
+                pingpong = true;
+            }
+        } else {
+            educationList = resultArray.educationList || [];
+            ticketList = resultArray.ticketList || [];
+
+            if (resultArray.usedTicket === 'T') badminton = true;
+            else if (resultArray.usedTicket === 'B') pingpong = true;
+            else if (resultArray.usedTicket === 'none') {
+                badminton = true;
+                pingpong = true;
+            }
+        }
+    }
+
+    const now = new Date();
+
+    // 현재 년월일
+    const today = now.toISOString().slice(0, 10); // "2026-02-24"
+
+    // 한달 뒤
+    const nextMonth = new Date(now);
+    nextMonth.setMonth(nextMonth.getMonth() + 1);
+    const nextMonthDate = nextMonth.toISOString().slice(0, 10); // "2026-03-24"
+
+    console.log(data.result);
+    console.log("pingpong", pingpong);
+    console.log("badminton", badminton);
 
     app.innerHTML = `
         <div class="sub-box">
@@ -129,36 +190,47 @@ const monthMemberSumbmit = async () => {
                                 </div>
                             </div>
                             <div class="bottom js-list-box">
-                                <button class="item-box">
-                                    <p class="item1">탁구(탁구일반)</p>
-                                    <p class="item2">2025-08-20</p>
-                                    <p class="item3">2025-09-19</p>
-                                    <p class="item4">44,000</p>
-                                </button>
-                                <button class="item-box">
-                                    <p class="item1">탁구(탁구할인)</p>
-                                    <p class="item2">2025-08-15</p>
-                                    <p class="item3">2025-08-30</p>
-                                    <p class="item4">35,000</p>
-                                </button>
-                                <button class="item-box">
-                                    <p class="item1">배드민턴(배드민턴일반)</p>
-                                    <p class="item2">2025-09-01</p>
-                                    <p class="item3">2025-09-20</p>
-                                    <p class="item4">56,000</p>
-                                </button>
-                                <button class="item-box">
-                                    <p class="item1">배드민턴(배드민턴할인)</p>
-                                    <p class="item2">2025-09-21</p>
-                                    <p class="item3">2025-09-30</p>
-                                    <p class="item4">22,000</p>
-                                </button>
-                                <button class="item-box">
-                                    <p class="item1">배드민턴(일일할인)</p>
-                                    <p class="item2">2025-10-10</p>
-                                    <p class="item3">2025-10-17</p>
-                                    <p class="item4">44,000</p>
-                                </button>
+                                ${educationList.length > 0 ? educationList.map(item => {
+                                    const numericAmount = parseInt(item.EDUCATION_TUITION || "0", 10);
+                                    const formattedAmount = numericAmount.toLocaleString("ko-KR");
+                                    return `
+                                            <button class="item-box" data-educationNo="${item.EDUCATION_INFO_NO}" data-price="${item.EDUCATION_TUITION}" data-useEndDate="" data-type="education" data-esntlId="${esntlId}">
+                                                <p class="item1">${item.EDUCATION_NAME}</p>
+                                                <p class="item2">${item.EDUCATION_START_DATE}</p>
+                                                <p class="item3">${item.EDUCATION_END_DATE}</p>
+                                                <p class="item4">${formattedAmount}</p>
+                                            </button>
+                                        `;
+                                }).join('') : ''}
+                                
+                                ${ticketList.length > 0 ? ticketList.map(item => {
+                                    return `
+                                            <button class="item-box" data-educationNo="${item.TICKET_NO}" data-price="30000" data-useEndDate="${item.TICKET_END_DATE}" data-type="ticket" data-esntlId="${esntlId}>
+                                                <p class="item1">${item.TICKET_TYPE === 'T' ? '탁구(월권 재등록)' : '배드민턴(월권 재등록)'}</p>
+                                                <p class="item2">${item.TICKET_START_DATE}</p>
+                                                <p class="item3">${item.TICKET_END_DATE}</p>
+                                                <p class="item4">30,000</p>
+                                            </button>
+                                        `;
+                                }).join('') : ''}
+                                
+                                ${pingpong ? `
+                                    <button class="item-box" data-educationNo="new" data-price="30000" data-useEndDate="" data-type="ticket_t" data-esntlId="${esntlId}>
+                                        <p class="item1">탁구(월권 신규)</p>
+                                        <p class="item2">${today}</p>
+                                        <p class="item3">${nextMonthDate}</p>
+                                        <p class="item4">30,000</p>
+                                    </button>
+                                ` : ''}
+
+                                ${badminton ? `
+                                    <button class="item-box" data-educationNo="new" data-price="30000" data-useEndDate="" data-type="ticket_b" data-esntlId="${esntlId}>
+                                        <p class="item1">배드민턴(월권 신규)</p>
+                                        <p class="item2">${today}</p>
+                                        <p class="item3">${nextMonthDate}</p>
+                                        <p class="item4">30,000</p>
+                                    </button>
+                                ` : ''}
                             </div>
                             <div class="right">
                                 <button type="button" class="up"><i><img src="/resources_kio/images/cont/up.png" alt="위로 이동 아이콘"></i></button>
@@ -200,7 +272,7 @@ const monthMemberSumbmit = async () => {
     
                     <div class="bottom-btn">
                         <a href="#" onclick="reloadPage('home'); return false;" class="back">취소</a>
-                        <a href="#" onclick="reloadPage('home'); return false;" class="check">등록</a>
+                        <a href="#" onclick="Transaction(1); return false;" class="check">등록</a>
                     </div>
                 </div>
             </div>
@@ -222,12 +294,69 @@ const memberVisit = async () => {
 
     Utils.showLoading(app);
 
-    const data = await Utils.postData('/test');
+    const barcode = sessionStorage.getItem('barcode');
+    const data = await Utils.postData('/findMemberEducation', { barcode: barcode });
 
     if (!data) {
         Utils.showError(app);
         return;
     }
+
+    if(data.result === "No Content") {
+        showAlert2("오류가 발생하였습니다.");
+        setTimeout(() => {
+            closeAlert2();
+            homeLoad();
+        }, 2000);
+        return;
+    }
+    else if(data.result === "noMember") {
+        showAlert2("일치하는 회원이 없습니다.");
+        setTimeout(() => {
+            closeAlert2();
+            homeLoad();
+        }, 2000);
+        return;
+    }
+    else if(data.result === "noEducation"){
+        showAlert2("수강중인 교육 또는 월 이용권이 없습니다.");
+        setTimeout(() => {
+            closeAlert2();
+            homeLoad();
+        }, 2000);
+        return;
+    }
+    else if(data.result === "already"){
+        showAlert2("이미 출석체크를 하였습니다.");
+        setTimeout(() => {
+            closeAlert2();
+            homeLoad();
+        }, 2000);
+        return;
+    }
+    else if(data.result === "success"){
+        showAlert2("출석체크 완료");
+        setTimeout(() => {
+            closeAlert2();
+            homeLoad();
+        }, 2000);
+        return;
+    }
+    else if(data.result.startsWith("ticket_")){
+        const enterMemberprint = await Utils.postData('/findMemberEducation', { name: data.result });
+        showAlert2("출석체크 완료");
+        setTimeout(() => {
+            closeAlert2();
+            homeLoad();
+        }, 2000);
+        return;
+    }
+    let resultArray = JSON.parse(data.result);
+
+    const educationList = resultArray.availableEducationList || [];
+    const ticketList = resultArray.availableticketList || [];
+
+    console.log(ticketList);
 
     app.innerHTML = `
         <div class="sub-box">
@@ -236,91 +365,34 @@ const memberVisit = async () => {
             </div>
             <div class="sub-box_in">
                 <div class="cont-box page3">
-                    <h2>회원인증</h2>
-    
-                    <div class="num-box">
-                        <div class="numbers-box_txt">
-                            <p class="label"><i><img src="/resources_kio/images/cont/label_ico.png" alt=""></i>휴대폰
-                                번호<span>(뒤 4자리)</span></p>
-                            <div class="numbers-box_num">
-                                <input type="text" name="first" id="first" maxlength="1" min="0" max="9" onlyNumber
-                                    placeholder="5">
-                                <input type="text" name="second" id="second" maxlength="1" min="0" max="9" onlyNumber
-                                    placeholder="6">
-                                <input type="text" name="third" id="third" maxlength="1" min="0" max="9" onlyNumber
-                                    placeholder="7">
-                                <input type="text" name="fourth" id="fourth" maxlength="1" min="0" max="9" onlyNumber
-                                    placeholder="8">
-                            </div>
-                            <div class="numbers-box_check">
-                                <a href="#">
-                                    <p>회원조회</p>
-                                </a>
-                            </div>
-                            <div class="numbers-box_mes">
-                                <p>휴대폰번호 뒤 4자리를 우측에 키패드로<br>
-                                    선택해 주세요.<br>
-                                    (회원카드를 사용하시려면 리더기에<br>
-                                    카드를 대 주세요.)</p>
-                            </div>
-                        </div>
-                        <div class="numbers-box_item">
-                            <input type="button" class="item-btn number" value="1">
-                            <input type="button" class="item-btn number" value="2">
-                            <input type="button" class="item-btn number" value="3">
-                            <input type="button" class="item-btn number" value="4">
-                            <input type="button" class="item-btn number" value="5">
-                            <input type="button" class="item-btn number" value="6">
-                            <input type="button" class="item-btn number" value="7">
-                            <input type="button" class="item-btn number" value="8">
-                            <input type="button" class="item-btn number" value="9">
-                            <button type="button" class="item-btn initi">재입력</button>
-                            <input type="button" class="item-btn number" value="0">
-                            <button type="button" class="item-btn delete"><i><img src="/resources_kio/images/cont/delete.png" alt="정정 아이콘"></i></button>
-                        </div>
-                    </div>
-    
                     <div class="mem-box">
                         <div class="mem-list">
                             <div class="top">
                                 <div class="item-box">
-                                    <p class="item1">회원명</p>
-                                    <p class="item2">휴대폰번호</p>
-                                    <p class="item3">생년월일</p>
+                                    <p class="item1">강좌/정기권</p>
+                                    <p class="item2">교육기간/이용기간</p>
+                                    <p class="item3">시간</p>
                                     <p class="item4">선택</p>
                                 </div>
                             </div>
                             <div class="bottom js-list-box">
-                                <button class="item-box">
-                                    <p class="item1">홍길동</p>
-                                    <p class="item2">010-****-5678</p>
-                                    <p class="item3">1981.08.20</p>
-                                    <p class="item4"><input type="radio" name="member" id="member1"></p>
-                                </button>
-                                <button class="item-box">
-                                    <p class="item1">탕수육</p>
-                                    <p class="item2">010-****-5678</p>
-                                    <p class="item3">1992.09.09</p>
-                                    <p class="item4"><input type="radio" name="member" id="member2"></p>
-                                </button>
-                                <button class="item-box">
-                                    <p class="item1">김말이</p>
-                                    <p class="item2">010-****-5678</p>
-                                    <p class="item3">2001.10.05</p>
-                                    <p class="item4"><input type="radio" name="member" id="member3"></p>
-                                </button>
-                                <button class="item-box">
-                                    <p class="item1">새우깡</p>
-                                    <p class="item2">010-****-5678</p>
-                                    <p class="item3">1985.03.12</p>
-                                    <p class="item4"><input type="radio" name="member" id="member4"></p>
-                                </button>
-                                <button class="item-box">
-                                    <p class="item1">비타민</p>
-                                    <p class="item2">010-****-5678</p>
-                                    <p class="item3">1998.05.31</p>
-                                    <p class="item4"><input type="radio" name="member" id="member5"></p>
-                                </button>
+                                ${educationList.map(item => `
+                                    <button class="item-box">
+                                        <p class="item1">${item.EDUCATION_NAME}</p>
+                                        <p class="item2">${item.EDUCATION_START_DATE} ~ ${item.EDUCATION_END_DATE}</p>
+                                        <p class="item3">${item.EDUCATION_START_TIME} ~ ${item.EDUCATION_END_TIME}</p>
+                                        <p class="item4"><input type="radio" name="select_no" value="${item.EDUCATION_NO}" data-type="education"></p>
+                                    </button>
+                                `).join('')}
+
+                                ${ticketList.map(item => `
+                                    <button class="item-box">
+                                        <p class="item1">${item.TICKET_TYPE === 'T' ? '탁구' : '배드민턴'}</p>
+                                        <p class="item2">${item.TICKET_START_DATE} ~ ${item.TICKET_END_DATE}</p>
+                                        <p class="item3">정기권</p>
+                                        <p class="item4"><input type="radio" name="select_no" value="${item.TICKET_NO}" data-type="ticket"></p>
+                                    </button>
+                                `).join('')}
                             </div>
                             <div class="right">
                                 <button type="button" class="up"><i><img src="/resources_kio/images/cont/up.png" alt="위로 이동 아이콘"></i></button>
@@ -330,6 +402,7 @@ const memberVisit = async () => {
                     </div>
     
                     <div class="bottom-btn">
+                        <a href="#" onclick="attendance(); return false;" class="memberCheck">확인</a>
                         <a href="#" onclick="reloadPage('home'); return false;" class="back">취소</a>
                     </div>
                 </div>
@@ -352,12 +425,16 @@ const onedayClassBuying = async () => {
 
     Utils.showLoading(app);
 
-    const data = await Utils.postData('/test');
+    const data = await Utils.postData('/holidayCheck');
 
     if (!data) {
         Utils.showError(app);
         return;
     }
+
+    const hour = new Date().getHours();
+    const isNight = hour >= 18 && hour < 24;
+    const isWeekend = data.result === "holiyday"; // 주말/공휴일
 
     app.innerHTML = `
         <div class="sub-box">
@@ -377,32 +454,18 @@ const onedayClassBuying = async () => {
                                 <div class="product-box__cont js-product-box--1">
                                     <div class="product-box__cont__item">
                                         <div>
-                                            <button type="button" class="event1" onclick="addPaymentList('탁구 주간 (일반)', 1500);">
-                                                <p>탁구 주간<br>(일반)</p>
-                                                <span>1,500원</span>
+                                            <button type="button" class="event1">
+                                                <p>탁구 야간<br>(일반)</p>
+                                                <span>1,800원</span>
                                             </button>
                                         </div>
                                         <div>
-                                            <button type="button" class="event2" onclick="addPaymentList('탁구 주간 (할인)', 1000);">
-                                                <p>탁구 주간<br>(할인)</p>
-                                                <span>1,000원</span>
+                                            <button type="button" class="event2">
+                                                <p>탁구 야간<br>(할인)</p>
+                                                <span>900원</span>
                                             </button>
                                         </div>
                                     </div>
-<!--                                    <div class="product-box__cont__item">-->
-<!--                                        <div>-->
-<!--                                            <button type="button" class="event1">-->
-<!--                                                <p>탁구 야간<br>(일반)</p>-->
-<!--                                                <span>1,000원</span>-->
-<!--                                            </button>-->
-<!--                                        </div>-->
-<!--                                        <div>-->
-<!--                                            <button type="button" class="event2">-->
-<!--                                                <p>탁구 야간<br>(할인)</p>-->
-<!--                                                <span>500원</span>-->
-<!--                                            </button>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
                                 </div>
                                 <div class="slide-nav">
                                     <span class="s_prev"><a href="#"
@@ -417,32 +480,18 @@ const onedayClassBuying = async () => {
                                 <div class="product-box__cont js-product-box--2">
                                     <div class="product-box__cont__item">
                                         <div>
-                                            <button type="button" class="event1" onclick="addPaymentList('배드민턴 주간 (일반)', 1500);">
-                                                <p>배드민턴 주간<br>(일반)</p>
-                                                <span>1,500원</span>
+                                            <button type="button" class="event1">
+                                                <p>배드민턴 야간<br>(일반)</p>
+                                                <span>1,800원</span>
                                             </button>
                                         </div>
                                         <div>
-                                            <button type="button" class="event2" onclick="addPaymentList('배트민턴 주간 (할인)', 1000);">
-                                                <p>배드민턴 주간<br>(할인)</p>
-                                                <span>1,000원</span>
+                                            <button type="button" class="event2">
+                                                <p>배드민턴 야간<br>(할인)</p>
+                                                <span>900원</span>
                                             </button>
                                         </div>
                                     </div>
-<!--                                    <div class="product-box__cont__item">-->
-<!--                                        <div>-->
-<!--                                            <button type="button" class="event1">-->
-<!--                                                <p>배드민턴 야간<br>(일반)</p>-->
-<!--                                                <span>1,000원</span>-->
-<!--                                            </button>-->
-<!--                                        </div>-->
-<!--                                        <div>-->
-<!--                                            <button type="button" class="event2">-->
-<!--                                                <p>배드민턴 야간<br>(할인)</p>-->
-<!--                                                <span>500원</span>-->
-<!--                                            </button>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
                                 </div>
                                 <div class="slide-nav">
                                     <span class="s_prev"><a href="#"
@@ -512,6 +561,51 @@ const onedayClassBuying = async () => {
 	    </div>
     `;
 
+    // 4가지 조건 조합
+    let dayType = "";
+    if (!isWeekend && !isNight)      dayType = "NOMAL_DAY";      // 평일 주간
+    else if (!isWeekend && isNight)  dayType = "NOMAL_NIGHT";    // 평일 야간
+    else if (isWeekend && !isNight)  dayType = "HOLIY_DAY";      // 주말 주간
+    else if (isWeekend && isNight)   dayType = "HOLIY_NIGHT";    // 주말 야간
+
+    const products = {
+        NOMAL_DAY: {
+            pingpong:  [{ label: "탁구 주간 (일반)",    price: 1200 }, { label: "탁구 주간 (할인)",    price: 600 }],
+            badminton: [{ label: "배드민턴 주간 (일반)", price: 1200 }, { label: "배드민턴 주간 (할인)", price: 600 }]
+        },
+        NOMAL_NIGHT: {
+            pingpong:  [{ label: "탁구 야간 (일반)",    price: 1800 }, { label: "탁구 야간 (할인)",    price: 900 }],
+            badminton: [{ label: "배드민턴 야간 (일반)", price: 1800 }, { label: "배드민턴 야간 (할인)", price: 900 }]
+        },
+        HOLIY_DAY: {
+            pingpong:  [{ label: "탁구 주간 (일반)",    price: 1800 }, { label: "탁구 주간 (할인)",    price: 900 }],
+            badminton: [{ label: "배드민턴 주간 (일반)", price: 1800 }, { label: "배드민턴 주간 (할인)", price: 900 }]
+        },
+        HOLIY_NIGHT: {
+            pingpong:  [{ label: "탁구 야간 (일반)",    price: 2400 }, { label: "탁구 야간 (할인)",    price: 1200 }],
+            badminton: [{ label: "배드민턴 야간 (일반)", price: 2400 }, { label: "배드민턴 야간 (할인)", price: 1200 }]
+        }
+    };
+
+    // js-product-box--1(탁구), js-product-box--2(배드민턴) 안의 item 교체
+    function renderButtons(sport, selector) {
+        const items = products[dayType][sport];
+        const container = document.querySelector(selector + " .product-box__cont__item");
+        container.innerHTML = items.map((item, idx) => `
+            <div>
+                <button type="button" class="event${idx + 1}" onclick="addPaymentList('${item.label}', ${item.price})">
+                    <p>${item.label.replace(" (", "<br>(")}</p>
+                    <span>${item.price.toLocaleString()}원</span>
+                </button>
+            </div>
+        `).join("");
+    }
+
+    renderButtons("pingpong",  ".js-product-box--1");
+    renderButtons("badminton", ".js-product-box--2");
+
+
+
     Utils.loadScript('/js/pages/onedayClass.js', () => {
         // 함수 실행
         pageCheck = "onedayClass";
@@ -526,12 +620,12 @@ const payCancel1 = async () => {
 
     Utils.showLoading(app);
 
-    const data = await Utils.postData('/test');
-
-    if (!data) {
-        Utils.showError(app);
-        return;
-    }
+    // const data = await Utils.postData('/test');
+    //
+    // if (!data) {
+    //     Utils.showError(app);
+    //     return;
+    // }
 
     app.innerHTML = `
         <div class="sub-box">
@@ -573,7 +667,7 @@ const payCancel1 = async () => {
                                         src="/resources_kio/images/cont/delete.png" alt="정정 아이콘"></i></button>
                         </div>
                     </div>
-    
+                    
                     <div class="bottom-btn">
                         <a href="#" onclick="reloadPage('home'); return false;" class="back"><i></i>취소</a>
                         <a href="#" onclick="cancelPasswordCheck(); return false;" class="check"><i></i>확인</a>
@@ -649,7 +743,7 @@ const payCancel2 = async () => {
                     </div>
                 </div>
             </div>
-        </div>WWWW
+        </div>
     `;
 
     Utils.loadScript('/js/pages/cancel2.js', () => {

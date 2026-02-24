@@ -161,6 +161,70 @@ public class KioskController {
         return ResponseEntity.ok(data);
     }
 
+    @PostMapping("/findMemberEducation")
+    @ResponseBody
+    public ResponseEntity<?> findMemberEducation(@RequestBody Map<String, Object> items) {
+        ReplyFromResrc reply = restUtil.ofPost("/kiosk/api/findMemberEducation", items);
+        Map<String, Object> data = new HashMap<>();
+        if(reply.getReply() == null) data.put("result", "No Content");
+        else data.put("result", reply.getReply());
+        return ResponseEntity.ok(data);
+    }
+
+    @PostMapping("/insertAttendance")
+    @ResponseBody
+    public ResponseEntity<?> insertAttendance(@RequestBody Map<String, Object> items) {
+        ReplyFromResrc reply = restUtil.ofPost("/kiosk/api/insertAttendance", items);
+        Map<String, Object> data = new HashMap<>();
+        if(reply.getReply() == null) data.put("result", "No Content");
+        else data.put("result", reply.getReply());
+        return ResponseEntity.ok(data);
+    }
+
+    @PostMapping("/findMonthlyRegist")
+    @ResponseBody
+    public ResponseEntity<?> findMonthlyRegist(@RequestBody Map<String, Object> items) {
+        ReplyFromResrc reply = restUtil.ofPost("/kiosk/api/findMonthlyRegist", items);
+        Map<String, Object> data = new HashMap<>();
+        if(reply.getReply() == null) data.put("result", "No Content");
+        else data.put("result", reply.getReply());
+        return ResponseEntity.ok(data);
+    }
+
+    @PostMapping("/updateMonthlyRegist")
+    @ResponseBody
+    public ResponseEntity<?> updateMonthlyRegist(@RequestBody Map<String, Object> items) {
+        ReplyFromResrc reply = restUtil.ofPost("/kiosk/api/updateMonthlyRegist", items);
+        Map<String, Object> data = new HashMap<>();
+        if(reply.getReply() == null) data.put("result", "No Content");
+        else data.put("result", reply.getReply());
+        return ResponseEntity.ok(data);
+    }
+
+    @PostMapping("/holiydayCheck")
+    @ResponseBody
+    public ResponseEntity<?> holiydayCheck(@RequestBody Map<String, Object> items) {
+        ReplyFromResrc reply = restUtil.ofPost("/kiosk/api/holiydayCheck");
+        Map<String, Object> data = new HashMap<>();
+        if(reply.getReply() == null) data.put("result", "No Content");
+        else data.put("result", reply.getReply());
+        return ResponseEntity.ok(data);
+    }
+
+    @PostMapping("/enterMemberPrint")
+    @ResponseBody
+    public ResponseEntity<?> enterMemberPrint(@RequestBody Map<String, Object> item) {
+        String name = (String) item.get("name");
+        if(name.endsWith("T")){
+            name = "종목 : 탁구";
+        } else {
+            name = "종목 : 배드민턴";
+        }
+        printerService.enterMemberPrint(name);
+
+        return ResponseEntity.ok(Map.of("result", printerService.getStatus()));
+    }
+
     // 시스템 종료 API
     @PostMapping("/shutdown")
     public void shutdown() {

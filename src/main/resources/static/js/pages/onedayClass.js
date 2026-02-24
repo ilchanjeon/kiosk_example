@@ -418,7 +418,7 @@ function Transaction(type) {
     }
 
     // 세금
-    var tax_amt = padl("0", 9, '0');
+    var tax_amt = padl(Math.round(tamt_value / 10), 9, '0');
     // 봉사료
     var sfee_amt = padl("0", 9, '0');
     // 비과세

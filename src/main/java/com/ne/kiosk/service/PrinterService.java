@@ -27,6 +27,7 @@ public class PrinterService {
     // 텍스트 정렬
     private static final byte[] ALIGN_LEFT = {ESC, 'a', 0};
     private static final byte[] ALIGN_CENTER = {ESC, 'a', 1};
+    private static final byte[] ALIGN_RIGHT = {ESC, 'a', 2};
 
     // 강조
     private static final byte[] BOLD_ON = {ESC, 'E', 1};
@@ -106,11 +107,22 @@ public class PrinterService {
             os.write(ALIGN_LEFT);
             os.write(BOLD_ON);
             os.write(SIZE_DOUBLE);
-            printText(os, "금 액          " + amt + " 원");
+            printText(os, "금 액");
             os.write(LINE_FEED);
-            printText(os, "부가세          " + tax + " 원");
+            os.write(ALIGN_RIGHT);
+            printText(os, amt + " 원");
             os.write(LINE_FEED);
-            printText(os, "합 계          " + tamt  + " 원");
+            os.write(ALIGN_LEFT);
+            printText(os, "부가세");
+            os.write(LINE_FEED);
+            os.write(ALIGN_RIGHT);
+            printText(os, tax + " 원");
+            os.write(LINE_FEED);
+            os.write(ALIGN_LEFT);
+            printText(os, "합 계");
+            os.write(LINE_FEED);
+            os.write(ALIGN_RIGHT);
+            printText(os, tamt  + " 원");
             os.write(BOLD_OFF);
             os.write(SIZE_NORMAL);
             os.write(LINE_FEED);
@@ -201,6 +213,69 @@ public class PrinterService {
             printText(os, timestamp);
             os.write(LINE_FEED);
             printText(os, "구매 수량: " + quantity);
+            os.write(LINE_FEED);
+
+            // 구분선
+            os.write(ALIGN_CENTER);
+            printText(os, "--------------------------------------------");
+            os.write(LINE_FEED);
+            os.write(LINE_FEED);
+            os.write(LINE_FEED);
+            os.write(LINE_FEED);
+            // 용지 자르기
+            os.write(CUT_PAPER);
+
+            os.flush();
+            log.info("영수증 출력 완료");
+            status = true;
+
+        } catch (Exception e) {
+            log.error("프린터 출력 오류: {}", e.getMessage(), e);
+            status = false;
+        }
+    }
+
+    public void enterMemberPrint(String name) {
+        if (!deviceManager.isPortOpen("printer")) {
+            log.error("프린터가 연결되지 않았습니다");
+            return;
+        }
+
+        try {
+            OutputStream os = deviceManager.getOutputStream("printer");
+            if (os == null) {
+                log.error("프린터 출력 스트림을 가져올 수 없습니다");
+                return;
+            }
+
+            // 초기화
+            os.write(INIT);
+            Thread.sleep(100);
+
+            // 헤더
+            os.write(LINE_FEED);
+            os.write(LINE_FEED);
+            os.write(ALIGN_CENTER);
+            os.write(SIZE_DOUBLE);
+            os.write(BOLD_ON);
+            printText(os, "[월권 입장권]");
+            os.write(LINE_FEED);
+            printText(os, name);
+            os.write(LINE_FEED);
+            os.write(BOLD_OFF);
+            os.write(SIZE_NORMAL);
+            os.write(LINE_FEED);
+
+            // 구분선
+            os.write(ALIGN_CENTER);
+            printText(os, "===========================================");
+            os.write(LINE_FEED);
+
+            // 거래 정보
+            os.write(ALIGN_CENTER);
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            printText(os, timestamp);
+            os.write(LINE_FEED);
             os.write(LINE_FEED);
 
             // 구분선

@@ -17,7 +17,7 @@ function openCity(evt, cityName) {
 
 /*-- 리스트 슬라이드 --*/
 function listBox(listName) {
-    const visibleCount = 3;
+    const visibleCount = 7;
 
     $(listName).each(function () {
         const $bottom = $(this);

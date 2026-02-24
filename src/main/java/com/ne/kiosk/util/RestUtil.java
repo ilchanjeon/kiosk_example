@@ -17,6 +17,7 @@ public class RestUtil {
     private final WebClient webClient;
 
     private static String resrc = "https://ytsports.or.kr";
+//    private static String resrc = "http://localhost:20200";
 
 
     public RestUtil(WebClient webClient) {
