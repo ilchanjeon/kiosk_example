@@ -205,7 +205,7 @@ const monthMemberSumbmit = async () => {
                                 
                                 ${ticketList.length > 0 ? ticketList.map(item => {
                                     return `
-                                            <button class="item-box" data-educationNo="${item.TICKET_NO}" data-price="30000" data-useEndDate="${item.TICKET_END_DATE}" data-type="ticket" data-esntlId="${esntlId}>
+                                            <button class="item-box" data-educationNo="${item.TICKET_NO}" data-price="30000" data-useEndDate="${item.TICKET_END_DATE}" data-type="ticket" data-esntlId="${esntlId}">
                                                 <p class="item1">${item.TICKET_TYPE === 'T' ? '탁구(월권 재등록)' : '배드민턴(월권 재등록)'}</p>
                                                 <p class="item2">${item.TICKET_START_DATE}</p>
                                                 <p class="item3">${item.TICKET_END_DATE}</p>
@@ -215,7 +215,7 @@ const monthMemberSumbmit = async () => {
                                 }).join('') : ''}
                                 
                                 ${pingpong ? `
-                                    <button class="item-box" data-educationNo="new" data-price="30000" data-useEndDate="" data-type="ticket_t" data-esntlId="${esntlId}>
+                                    <button class="item-box" data-educationNo="new" data-price="30000" data-useEndDate="" data-type="ticket_t" data-esntlId="${esntlId}">
                                         <p class="item1">탁구(월권 신규)</p>
                                         <p class="item2">${today}</p>
                                         <p class="item3">${nextMonthDate}</p>
@@ -224,7 +224,7 @@ const monthMemberSumbmit = async () => {
                                 ` : ''}
 
                                 ${badminton ? `
-                                    <button class="item-box" data-educationNo="new" data-price="30000" data-useEndDate="" data-type="ticket_b" data-esntlId="${esntlId}>
+                                    <button class="item-box" data-educationNo="new" data-price="30000" data-useEndDate="" data-type="ticket_b" data-esntlId="${esntlId}">
                                         <p class="item1">배드민턴(월권 신규)</p>
                                         <p class="item2">${today}</p>
                                         <p class="item3">${nextMonthDate}</p>
