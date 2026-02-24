@@ -232,7 +232,7 @@ function Transaction(type) {
     useEndDate = selected.dataset.useenddate;
     const price = selected.dataset.price;
     selectType = selected.dataset.type;
-    $esntlId = selected.dataset.esntlId;
+    $esntlId = selected.dataset.esntlid;
 
     showOverRay();
 
