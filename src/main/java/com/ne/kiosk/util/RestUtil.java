@@ -16,8 +16,7 @@ public class RestUtil {
 
     private final WebClient webClient;
 
-    private static String resrc = "https://ytsports.or.kr";
-//    private static String resrc = "http://localhost:20200";
+    private static String resrc = "http://localhost:20200";
 
 
     public RestUtil(WebClient webClient) {
@@ -37,7 +36,7 @@ public class RestUtil {
                         .uri(requestApiUrl)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML)
-                        .header("KIOSK-NAME", "ytkiosk")
+                        .header("KIOSK-NAME", "서버와 규약된 암호화 키")
                         .bodyValue(param)
                         .retrieve().toEntity(String.class)
                         .block())
@@ -67,7 +66,7 @@ public class RestUtil {
                         .post()
                         .uri(requestApiUrl)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("KIOSK-NAME", "ytkiosk")
+                        .header("KIOSK-NAME", "서버와 규약된 암호화 키")
                         .accept(MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML)
                         .retrieve().toEntity(String.class)
                         .block())
