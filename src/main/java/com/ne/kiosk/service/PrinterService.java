@@ -134,15 +134,15 @@ public class PrinterService {
 
             // 푸터
             os.write(ALIGN_LEFT);
-            printText(os, "상호: 수원시체육회(영통복합체육관)");
+            printText(os, "상호: 테스트");
             os.write(LINE_FEED);
-            printText(os, "주소: 경기도 수원시 장안구 경수대로 893 (조원동 775)");
+            printText(os, "주소: 경기도 ..");
             os.write(LINE_FEED);
-            printText(os, "대표자: 박광국");
+            printText(os, "대표자: 테스트");
             os.write(LINE_FEED);
-            printText(os, "전화번호: 031-241-0334");
+            printText(os, "전화번호: 031-123-1234");
             os.write(LINE_FEED);
-            printText(os, "사업자등록번호: 2558200310");
+            printText(os, "사업자등록번호: 123412341234");
             os.write(LINE_FEED);
             os.write(LINE_FEED);
             os.write(LINE_FEED);
