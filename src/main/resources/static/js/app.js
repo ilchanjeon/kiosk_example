@@ -26,7 +26,7 @@ const homeLoad = async () => {
         <div class="main-box">
             <div class="main-box_in">
                 <div class="logo-box">
-                    <h1 class="logo"><i><img src="/resources_kio/images/cont/msports-kio-logo.png" alt=""></i>영통복합체육센터</h1>
+                    <h1 class="logo"><i><img src="/resources_kio/images/cont/msports-kio-logo.png" alt=""></i>테스트명칭</h1>
                 </div>
                 <div class="cont-box">
                     <div class="item">
@@ -66,7 +66,7 @@ const homeLoad = async () => {
                         </a>
                     </div>
                 </div>
-                <p class="capyright">COPYRIGHT © 영통복합체육센터. ALL RIGHTS RESERVED.</p>     
+                <p class="capyright">COPYRIGHT © 테스트명칭. ALL RIGHTS RESERVED.</p>     
                 <input type="text" id="barcodeInput" value="">          
             </div>
 	    </div>
@@ -171,7 +171,7 @@ const monthMemberSumbmit = async () => {
     app.innerHTML = `
         <div class="sub-box">
             <div class="logo-box">
-                <h1 class="logo"><i><img src="/resources_kio/images/cont/msports-kio-logo.png" alt=""></i>영통복합체육센터</h1>
+                <h1 class="logo"><i><img src="/resources_kio/images/cont/msports-kio-logo.png" alt=""></i>테스트명칭</h1>
             </div>
             <div class="sub-box_in">
                 <div class="cont-box page2">
@@ -361,7 +361,7 @@ const memberVisit = async () => {
     app.innerHTML = `
         <div class="sub-box">
             <div class="logo-box">
-                <h1 class="logo"><i><img src="/resources_kio/images/cont/msports-kio-logo.png" alt=""></i>영통복합체육센터</h1>
+                <h1 class="logo"><i><img src="/resources_kio/images/cont/msports-kio-logo.png" alt=""></i>테스트명칭</h1>
             </div>
             <div class="sub-box_in">
                 <div class="cont-box page3">
@@ -439,7 +439,7 @@ const onedayClassBuying = async () => {
     app.innerHTML = `
         <div class="sub-box">
             <div class="logo-box">
-                <h1 class="logo"><i><img src="/resources_kio/images/cont/msports-kio-logo.png" alt=""></i>영통복합체육센터</h1>
+                <h1 class="logo"><i><img src="/resources_kio/images/cont/msports-kio-logo.png" alt=""></i>테스트명칭</h1>
             </div>
             <div class="sub-box_in">
                 <div class="cont-box page4">
@@ -630,7 +630,7 @@ const payCancel1 = async () => {
     app.innerHTML = `
         <div class="sub-box">
             <div class="logo-box">
-                <h1 class="logo"><i><img src="/resources_kio/images/cont/msports-kio-logo.png" alt=""></i>영통복합체육센터</h1>
+                <h1 class="logo"><i><img src="/resources_kio/images/cont/msports-kio-logo.png" alt=""></i>테스트명칭</h1>
             </div>
             <div class="sub-box_in">
                 <div class="cont-box page5">
@@ -712,7 +712,7 @@ const payCancel2 = async () => {
     app.innerHTML = `
         <div class="sub-box">
             <div class="logo-box">
-                <h1 class="logo"><i><img src="./resources_kio/images/cont/msports-kio-logo.png" alt=""></i>영통복합체육센터</h1>
+                <h1 class="logo"><i><img src="./resources_kio/images/cont/msports-kio-logo.png" alt=""></i>테스트명칭</h1>
             </div>
             <div class="sub-box_in">
                 <div class="cont-box page5">
