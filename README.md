@@ -94,7 +94,7 @@ private static final String PRINTER_PORT = "COM5";
 ````
 1. 새로운 JAR 파일로 교체
    - 새로운 JAR 파일을 빌드하여 기존 JAR 파일과 교체
-   - 영통복합체육센터 ROOT > storage > kiosk > kiosk.jar 위치에 새로운 JAR 파일 업로드 (FTP 등 사용) * kiosk.jar 명 유지
+   - 서버 저장소 ROOT > storage > kiosk > kiosk.jar 위치에 새로운 JAR 파일 업로드 (FTP 등 사용) * kiosk.jar 명 유지
 2. 버전 정보 업데이트
    - 같은 경로 내에 kiosk-version.json 파일 내 VERSION 상수 업데이트 (예: "1.0.1 -> 1.0.2")
 3. KIOSK 재시작
@@ -102,7 +102,7 @@ private static final String PRINTER_PORT = "COM5";
 ````
 
 ### 주요 API 엔드포인트
-#### KIOSK에서 영통복합체육센터 서버로 요청하는 API 엔드포인트
+#### KIOSK에서 서버로 요청하는 API 엔드포인트
 ````
 GET /api/status - 초음파 거리 조회
 POST /api/paymentResult - OFFLINE 결제 결과 수신
